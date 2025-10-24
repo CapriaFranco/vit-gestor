@@ -1,19 +1,19 @@
 # 🏐 Volleyball Tournament 2025 - Registration System
 
-Web system for team registration in the 2025 Volleyball Tournament. Developed with PHP, MySQL and JavaScript.
+Web system for team registration in the Volleyball Tournament 2025. Built with PHP, MySQL and JavaScript.
 
-[![Español](https://img.shields.io/badge/Español-README.md-red)](README.md)
-[![Version](https://img.shields.io/badge/version-v0.1.3-green)](CHANGELOG.md)
+[![Español](https://img.shields.io/badge/Español-README.md-blue)](README.md)
+[![Version](https://img.shields.io/badge/version-v0.1.4-green)](CHANGELOG.md)
 [![Changelog](https://img.shields.io/badge/changelog-view%20history-blue)](CHANGELOG.md)
 
 ## 📋 What is it?
 
-This is a web system that allows teams to register to participate in the 2025 Volleyball Tournament. Teams can:
+This is a web system that allows teams to register to participate in the Volleyball Tournament 2025. Teams can:
 
-- Select their course (1st to 7th year)
-- Choose their division (A, B, C for basic; 1st, 2nd for superior)
-- Register the team name
-- Select the game system (6:0, 4:2, 5:1)
+- Select their grade (1st to 7th)
+- Choose their division (A, B, C for basic; 1st, 2nd for advanced)
+- Register team name
+- Select game system (6:0, 4:2, 5:1)
 - Add members with their positions
 - Choose jersey color (with duplicate validation)
 - View all registered teams organized by cycles
@@ -49,7 +49,7 @@ This is a web system that allows teams to register to participate in the 2025 Vo
    mysql -u root -p < sql/db.sql
    
    -- For InfinityFree
-   mysql -u usuario -p < sql/db-infinityfree.sql
+   mysql -u username -p < sql/db-infinityfree.sql
    \`\`\`
 
 4. **Configure the server**
@@ -61,7 +61,7 @@ This is a web system that allows teams to register to participate in the 2025 Vo
 ### Registration flow
 
 1. **Main page** → Registration form
-2. **Course selection** → Division is enabled
+2. **Grade selection** → Division is enabled
 3. **Team name** → Game system is enabled
 4. **Game system** → Members table is enabled
 5. **Members** → Color selection is enabled
@@ -71,7 +71,7 @@ This is a web system that allows teams to register to participate in the 2025 Vo
 ### Validations
 
 - ✅ Required fields
-- ✅ Unique colors per course
+- ✅ Unique colors per grade
 - ✅ Valid positions according to game system
 - ✅ Duplicate prevention
 
@@ -91,7 +91,7 @@ vit-gestor/
 ├── .htaccess              # Route configuration
 ├── php/
 │   ├── db.example.php     # Configuration example
-│   ├── db.php             # Real configuration (DON'T upload)
+│   ├── db.php             # Real configuration (DO NOT upload)
 │   ├── functions.php      # Helper functions
 │   ├── clear_session.php  # Session cleanup
 │   └── colores_ajax.php   # Colors API
@@ -123,9 +123,9 @@ $dbname = "vit_gestor_db";
 \`\`\`php
 // php/db.php
 $servername = "sql309.infinityfree.com";
-$username = "tu_usuario";
-$password = "tu_password";
-$dbname = "tu_base_datos";
+$username = "your_username";
+$password = "your_password";
+$dbname = "your_database";
 \`\`\`
 
 ## 🎨 Features
@@ -136,26 +136,26 @@ $dbname = "tu_base_datos";
 - **Dynamic position system** according to game system
 - **Custom success and error pages**
 - **Friendly routing** with .htaccess
-- **Smart WhatsApp links** (auto-detects mobile/desktop)
+- **Smart WhatsApp links** (automatically detects mobile/desktop)
 - **Cross-browser compatibility** optimized with autoprefixer
-- **Pattern validations** for Spanish special characters
-- **Field length configuration** (3-100 chars for team, 4-100 for members/color)
-- **Registered teams view** organized by cycles (Basic/Superior)
+- **Pattern validations** for special Spanish characters
+- **Field length** configured (3-100 chars for team, 4-100 for members/color)
+- **Registered teams view** organized by cycles (Basic/Advanced)
 - **Visual indicators** for substitutes and captains
-- **Real-time statistics counters**
-- **Consistent design** with registration form
-- **Optimized tables** with horizontal scroll
-- **Improved spacing** in forms for mobile devices
+- **Statistics counters** for registered teams and people
+- **Optimized tables** with horizontal scroll on mobile
+- **Complete SEO meta tags** for search engines and social media
+- **Open Graph and Twitter Cards** for social sharing
+- **Optimized social image** (1200x628px) for previews
 
 ## 📊 Versions
 
-### 🚀 Current: v0.1.3
-- ✅ Registered teams page with organization by cycles
-- ✅ Visual indicators for substitutes and captains
-- ✅ Real-time statistics counters
-- ✅ Consistent design with registration form
-- ✅ Optimized tables with horizontal scroll
-- ✅ Improved spacing in forms for mobile devices
+### 🚀 Current: v0.1.4
+- ✅ Complete meta tags for SEO and social media
+- ✅ Open Graph and Twitter Cards implemented
+- ✅ Optimized image for social sharing (1200x628px)
+- ✅ Theme color with site primary color (#94d0af)
+- ✅ CSS grid columns error fix
 
 ### 📝 Complete history
 See [CHANGELOG.md](CHANGELOG.md) for detailed change history.
@@ -168,10 +168,10 @@ See [CHANGELOG.md](CHANGELOG.md) for detailed change history.
 3. Submit the registration
 4. Receive success confirmation
 
-### View Registered Teams
-1. Access `/teams` to view all registered teams
-2. Teams are organized by cycles (Basic/Superior)
-3. View team details, members, and positions
+### View registered teams
+1. Access `/teams` to see all registered teams
+2. Teams are organized by cycles (Basic/Advanced)
+3. View team details, members and positions
 4. Use the legend to understand position indicators
 
 ## 🤝 Contributing
@@ -186,6 +186,6 @@ See [CHANGELOG.md](CHANGELOG.md) for detailed change history.
 
 **Capria Franco** - [GitHub](https://github.com/CapriaFranco)
 
----
+--- 
 
 ⭐ **Give it a star if you like the project!** ⭐

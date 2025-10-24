@@ -5,12 +5,34 @@ Todas las notables cambios a este proyecto serán documentadas en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-# 📝 Changelog
+## [v0.1.4] - 2025-10-24 - 19:39:30
 
-Todas las notables cambios a este proyecto serán documentadas en este archivo.
+### ✨ Nuevo
+- **Etiquetas meta completas**: Implementadas etiquetas meta para SEO en todas las páginas
+- **Open Graph**: Agregadas etiquetas Open Graph para compartir en Facebook y redes sociales
+- **Twitter Cards**: Implementadas Twitter Cards para previsualizaciones en Twitter/X
+- **Imagen para redes sociales**: Nueva imagen optimizada de 1200x628px para compartir
+- **Theme color**: Color de tema del navegador usando el color primario (#94d0af)
 
-El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
-y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+### 🎨 SEO y Redes Sociales
+- **Meta description**: Descripciones únicas y optimizadas para cada página
+- **Meta keywords**: Palabras clave relevantes para búsquedas
+- **Meta author**: Información de autoría del sitio
+- **Meta robots**: Configuración de indexación para motores de búsqueda
+- **OG tags**: og:title, og:description, og:image, og:url, og:type
+- **Twitter tags**: twitter:card, twitter:title, twitter:description, twitter:image
+- **Favicon**: Icono del sitio en todas las páginas
+
+### 🐛 Corregido
+- **Error CSS**: Corregido error de sintaxis en `-ms-grid-columns` (línea 337)
+  - Antes: `-ms-grid-columns: (1fr)[2];` ❌
+  - Ahora: `-ms-grid-columns: 1fr 1fr;` ✅
+- **Validación CSS**: Eliminados errores de sintaxis en media queries
+
+### 📊 Mejoras
+- **Imagen OG optimizada**: Imagen de 1200x628px para previsualizaciones perfectas
+- **URLs dinámicas**: Open Graph URLs generadas dinámicamente según el entorno
+- **Metadatos consistentes**: Todas las páginas con el mismo conjunto de meta tags
 
 ## [v0.1.3] - 2025-10-24 - 18:20:00
 

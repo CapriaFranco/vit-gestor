@@ -334,7 +334,7 @@ main {
 
 @media (min-width: 480px) {
   .curso {
-    -ms-grid-columns: (1fr)[2];
+    -ms-grid-columns: 1fr 1fr;
     grid-template-columns: repeat(2, 1fr);
   }
 }

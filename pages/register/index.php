@@ -69,8 +69,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Torneo de Voley - Edición 2025</title>
-     <link rel="stylesheet" href="<?php echo buildPath($base_path, 'styles/main.css'); ?>">
+    <link rel="stylesheet" href="<?php echo buildPath($base_path, 'styles/main.css?v=2'); ?>">
     <link rel="icon" type="image/x-icon" href="<?php echo buildPath($base_path, 'assets/img/favicon.ico'); ?>">
+
+    <!-- Added comprehensive meta tags for SEO and social sharing -->
+    <meta name="description" content="Registro oficial para el Torneo de Voley Interno 2025 del VIT. Inscribe tu equipo y participa en la competencia de voleibol más emocionante del año.">
+    <meta name="keywords" content="torneo voley, voleibol, VIT, registro equipos, torneo 2025, competencia deportiva, voleibol escolar">
+    <meta name="author" content="Capria Franco">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#94d0af">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Registro - Torneo de Voley VIT 2025">
+    <meta property="og:description" content="Inscribe tu equipo en el Torneo de Voley Interno 2025. Completa el formulario de registro y únete a la competencia.">
+    <meta property="og:image" content="<?php echo buildPath($base_path, 'assets/img/vit-logo-redes.png'); ?>">
+    <meta property="og:url" content="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Registro - Torneo de Voley VIT 2025">
+    <meta name="twitter:description" content="Inscribe tu equipo en el Torneo de Voley Interno 2025. Completa el formulario de registro y únete a la competencia.">
+    <meta name="twitter:image" content="<?php echo buildPath($base_path, 'assets/img/vit-logo-redes.png'); ?>">
 </head>
 <body>
     <main>
