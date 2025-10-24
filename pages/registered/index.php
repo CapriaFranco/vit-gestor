@@ -41,7 +41,7 @@
             
             <p>Para mantenerse informado sobre el torneo, únase a nuestro grupo de WhatsApp:</p>
             
-            <a href="https://chat.whatsapp.com/CbpE4tkN2kMAoaTlkQXSLr?mode=wwt" target="_blank" class="whatsapp-button">
+            <a id="whatsappLink" target="_blank" class="whatsapp-button">
                 <img src="<?php echo buildPath($base_path, 'assets/img/icons/whatsapp.svg'); ?>" alt="WhatsApp" loading="lazy" decoding="async">
                 Unirse al grupo
             </a>
@@ -63,6 +63,12 @@
         setTimeout(() => {
             fetch('<?php echo buildPath($base_path, 'php/clear_session.php'); ?>');
         }, 2000);
+
+        // Detectar si el usuario está usando un dispositivo móvil
+        const mobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        const linkMobile = "intent://chat.whatsapp.com/CbpE4tkN2kMAoaTlkQXSLr#Intent;package=com.whatsapp;scheme=https;end";
+        const linkDesktop = "https://chat.whatsapp.com/CbpE4tkN2kMAoaTlkQXSLr";
+        document.getElementById("whatsappLink").href = mobile ? linkMobile : linkDesktop;
     </script>
 </body>
 </html>
