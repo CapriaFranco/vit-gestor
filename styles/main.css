@@ -1,0 +1,681 @@
+/* Incluimos la fuente Lexend de assets/fonts/Lexend */
+@font-face {
+  font-family: Lexend-medium;
+  src: url(./../assets/font/Lexend/static/Lexend-Medium.ttf);
+}
+@font-face {
+  font-family: Pridi-bold;
+  src: url(./../assets/font/Pridi/Pridi-Bold.ttf);
+}
+
+:root {
+  --color-primary: #94d0af;
+  --color-secondary: #afdcc3;
+  --color-effects: #cae8d7;
+  --color-bg-light: #e4f3eb;
+  --color-light: #ffffff;
+  --color-dark: #181717;
+  --color-text-muted: #5a5a5a;
+  --color-border: #d0d0d0;
+  --color-success: #4caf50;
+  --color-error: #f44336;
+  --color-info: #dc3545;
+
+  --font-family-titles: "Pridi-bold", serif;
+  --font-family-text: "Lexend-medium", sans-serif;
+
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-family-text);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-dark);
+  background: linear-gradient(135deg, var(--color-bg-light) 0%, var(--color-secondary) 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-md);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-titles);
+  line-height: 1.2;
+  margin-bottom: var(--spacing-md);
+}
+
+h1 {
+  font-size: 1.75rem;
+  color: var(--color-primary);
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+/* Main container styling */
+main {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Form styling with modern card design */
+.form {
+  background: var(--color-light);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* Form header with logo */
+.form-header {
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 2px solid var(--color-effects);
+}
+
+.form-header img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.form-header h1 {
+  margin-bottom: var(--spacing-xs);
+}
+
+.form-header p {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+/* Flex utilities */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-md);
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.dn {
+  display: none;
+}
+
+/* Curso section with responsive grid */
+.curso {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  align-items: start;
+}
+
+/* Fixed alignment for curso and division fields */
+.curso .flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  align-items: stretch;
+}
+
+.curso .flex-col label {
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.curso .flex-col select {
+  margin-top: 0;
+}
+
+.curso .flex-col label {
+  min-height: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 480px) {
+  .curso {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Form field styling */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+label {
+  font-weight: 600;
+  color: var(--color-dark);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+/* Updated icon styling for labels and table headers */
+.label-icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+/* Centered table icon in header */
+.table-icon {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* New positioning for required icon - absolute positioned above input on left */
+.required-icon-absolute {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  filter: invert(27%) sepia(93%) saturate(4447%) hue-rotate(347deg) brightness(91%) contrast(92%);
+  z-index: 1;
+  background: white;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.table-icon {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.25rem;
+}
+
+.required-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--color-info);
+  flex-shrink: 0;
+}
+
+/* Input and select styling */
+input[type="text"],
+select {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-text);
+  font-size: 1rem;
+  color: var(--color-dark);
+  background: var(--color-light);
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(148, 208, 175, 0.2);
+}
+
+input[type="text"]::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+/* Added styling for select options */
+select option {
+  padding: var(--spacing-sm);
+  background: var(--color-light);
+  color: var(--color-dark);
+}
+
+select option:hover,
+select option:focus {
+  background: var(--color-bg-light);
+}
+
+select option:disabled {
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+/* Table styling for integrantes */
+#tablaIntegrantes {
+  margin-top: var(--spacing-sm);
+}
+
+/* Added wrapper for horizontal scroll on mobile */
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-md);
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 2px solid var(--color-effects);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  min-width: 500px;
+}
+
+thead {
+  background: var(--color-primary);
+  color: var(--color-light);
+}
+
+/* Centered first column header with icon */
+thead th:first-child {
+  text-align: center;
+  width: 60px;
+}
+
+thead th {
+  padding: var(--spacing-md);
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--color-effects);
+  transition: background-color 0.2s;
+}
+
+tbody tr:hover {
+  background-color: var(--color-bg-light);
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* Fixed alignment for table cells with inputs and selects */
+tbody td {
+  padding: var(--spacing-sm);
+  vertical-align: middle;
+}
+
+tbody th {
+  padding: var(--spacing-md);
+  text-align: center;
+  font-weight: 600;
+  background: var(--color-effects);
+  color: var(--color-dark);
+  font-size: 0.9rem;
+}
+
+tbody td {
+  padding: var(--spacing-sm);
+}
+
+tbody td input,
+tbody td select {
+  margin: 0;
+}
+
+tbody td input,
+tbody td select {
+  margin: 0;
+  width: 100%;
+}
+
+/* Added styling for circle-slash icon in positions */
+.position-disabled {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  color: var(--color-text-muted);
+}
+
+.position-disabled img {
+  width: 18px;
+  height: 18px;
+  opacity: 0.6;
+}
+
+/* Color info section */
+#colorDiv {
+  background: var(--color-bg-light);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-effects);
+}
+
+/* Updated color list styling with empty state */
+#coloresUsados {
+  display: block;
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--color-light);
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--color-primary);
+  min-height: 3rem;
+}
+
+#coloresUsados.empty {
+  color: var(--color-text-muted);
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#coloresUsados p {
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-dark);
+}
+
+#coloresUsados ul {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+#coloresUsados li {
+  background: var(--color-effects);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: var(--color-dark);
+}
+
+/* Improved submit button contrast */
+button[type="submit"] {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: var(--color-primary);
+  color: var(--color-dark);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-titles);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button[type="submit"]:hover {
+  background: var(--color-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+/* Abbr styling for required fields */
+abbr {
+  text-decoration: none;
+  color: var(--color-error);
+  font-weight: bold;
+  margin-left: var(--spacing-xs);
+}
+
+/* Success page styling */
+.success-container {
+  background: var(--color-light);
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--spacing-lg);
+  background: var(--color-success);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-icon svg {
+  width: 50px;
+  height: 50px;
+  fill: var(--color-light);
+}
+
+.success-container h1 {
+  color: var(--color-success);
+  margin-bottom: var(--spacing-lg);
+}
+
+.success-container p {
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.6;
+}
+
+.whatsapp-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: #25d366;
+  color: var(--color-light);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.whatsapp-button:hover {
+  background: #20ba5a;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.whatsapp-button img {
+  width: 24px;
+  height: 24px;
+}
+
+.note {
+  background: var(--color-bg-light);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--color-primary);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  text-align: left;
+}
+
+/* 404 Error page styling */
+.error-container {
+  background: var(--color-light);
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Fixed error icon sizing */
+.error-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  max-width: 80px;
+  max-height: 80px;
+}
+
+.error-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.error-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--color-error);
+}
+
+.error-container h1 {
+  font-size: 4rem;
+  color: var(--color-error);
+  margin-bottom: var(--spacing-sm);
+}
+
+.error-container h2 {
+  color: var(--color-dark);
+  margin-bottom: var(--spacing-lg);
+}
+
+.error-container p {
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-xl);
+}
+
+.home-button {
+  display: inline-block;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: var(--color-primary);
+  color: var(--color-light);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.home-button:hover {
+  background: var(--color-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  .form {
+    padding: var(--spacing-lg);
+  }
+
+  table {
+    font-size: 0.85rem;
+  }
+
+  thead th,
+  tbody th,
+  tbody td {
+    padding: var(--spacing-sm);
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  /* Better mobile spacing for curso/division */
+  .curso {
+    gap: var(--spacing-lg);
+  }
+}
+
+/* Animation for form sections appearing */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form > div:not(.dn) {
+  animation: fadeIn 0.3s ease-out;
+}
