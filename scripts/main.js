@@ -161,7 +161,10 @@ function mostrarIntegrantes() {
     inp.type = "text"
     inp.name = "integrante_" + i
     inp.placeholder = i === 1 ? "Nombre del capitán" : `Nombre del integrante ${i}`
-    inp.title = i === 1 ? "Ingrese el nombre del capitán" : `Ingrese el nombre del integrante ${i}`
+    inp.pattern = "[A-Za-záéíóúÁÉÍÓÚñÑ ]+"
+    inp.title = i === 1 ? "Ingrese el nombre del capitán. Solo se permiten letras A-Z o a-z" : `Ingrese el nombre del integrante ${i}. Solo se permiten letras A-Z o a-z`
+    inp.maxLength  = 100
+    inp.minLength = 4
     inp.required = i <= cantidad
 
     if (i <= cantidad) {

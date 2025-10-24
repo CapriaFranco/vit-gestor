@@ -5,6 +5,32 @@ Todas las notables cambios a este proyecto serán documentadas en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.1.2] - 2025-10-24 - 15:00:00
+
+### ✨ Mejorado
+- **Compatibilidad de navegadores**: Adaptado CSS para todos los navegadores usando autoprefixer
+- **Mejor soporte cross-browser**: Garantizada compatibilidad con navegadores modernos y legacy
+- **Validaciones de formulario**: Implementadas validaciones de patrones para campos de texto
+
+### 🔧 Técnico
+- Implementado autoprefixer para CSS
+- Optimización de estilos para mejor rendimiento
+- Mejoras en la compatibilidad de prefijos CSS
+- Agregadas validaciones de patrones con regex para campos de texto:
+  - **Nombre del equipo**: `pattern="[A-Za-záéíóúÁÉÍÓÚñÑ _-]+"` (min: 3, max: 100 caracteres)
+  - **Integrantes**: `pattern="[A-Za-záéíóúÁÉÍÓÚñÑ ]+"` (min: 4, max: 100 caracteres)
+  - **Color**: `pattern="[A-Za-záéíóúÁÉÍÓÚñÑ ]+"` (min: 4, max: 100 caracteres)
+
+### 🎨 CSS Cross-browser
+- Adaptación completa de estilos para compatibilidad universal
+- Prefijos CSS automáticos para navegadores legacy
+- Optimización de rendimiento visual
+
+### 📝 Validaciones mejoradas
+- Patrones regex para caracteres especiales en español
+- Longitud mínima y máxima configurada por campo
+- Mejor experiencia de usuario con validaciones más precisas
+
 ## [v0.1.1] - 2025-10-24 - 14:14:00
 
 ### 🐛 Corregido

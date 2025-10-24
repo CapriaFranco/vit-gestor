@@ -118,7 +118,7 @@
                     Nombre del equipo
                     <abbr title="Campo obligatorio">*</abbr>
                 </label>
-                <input type="text" id="nombre_equipo" name="nombre_equipo" placeholder="Ingrese el nombre del equipo" title="Ingrese el nombre del equipo" required>
+                <input type="text" id="nombre_equipo" name="nombre_equipo" placeholder="Ingrese el nombre del equipo" pattern="[A-Za-z0-9áéíóúÁÉÍÓÚñÑ _-]+" title="Ingrese el nombre del equipo. Solo se permiten letras, números, espacios, guiones o guion bajo" maxlength="100" minlength="3" required>
             </div>
 
             <div id="div4" class="flex-col dn">
@@ -161,7 +161,7 @@
                     Color de remera
                     <abbr title="Campo obligatorio">*</abbr>
                 </label>
-                <input type="text" name="color_remera" id="color_remera" placeholder="Ej: Rojo, Azul, Verde" title="Ingrese el color de la remera del equipo" required>
+                <input type="text" name="color_remera" id="color_remera" placeholder="Ej: Rojo, Azul, Verde" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ ]+" title="Ingrese el color de la remera del equipo. Solo se permiten letras A-Z o a-z" maxlength="100" minlength="4" required>
                 <div id="coloresUsados"></div>
             </div>
 

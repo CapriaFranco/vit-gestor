@@ -3,7 +3,7 @@
 Sistema web para el registro de equipos en el Torneo de Voley 2025. Desarrollado con PHP, MySQL y JavaScript.
 
 [![English](https://img.shields.io/badge/English-README.en.md-blue)](README.en.md)
-[![Version](https://img.shields.io/badge/version-v0.1.1-green)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v0.1.2-green)](CHANGELOG.md)
 [![Changelog](https://img.shields.io/badge/changelog-ver%20historial-blue)](CHANGELOG.md)
 
 ## 📋 ¿Qué es?
@@ -136,6 +136,20 @@ $dbname = "tu_base_datos";
 - **Ruteo amigable** con .htaccess
 - **Enlaces inteligentes de WhatsApp** (detecta móvil/desktop automáticamente)
 - **Compatibilidad cross-browser** optimizada con autoprefixer
+- **Validaciones de patrones** para caracteres especiales en español
+- **Longitud de campos** configurada (3-100 caracteres para equipo, 4-100 para integrantes/color)
+
+## 📊 Versiones
+
+### 🚀 Actual: v0.1.2
+- ✅ Compatibilidad mejorada para todos los navegadores
+- ✅ Enlaces de WhatsApp inteligentes
+- ✅ Sistema de detección automática de dispositivos
+- ✅ Validaciones de patrones para texto en español
+- ✅ Adaptación CSS cross-browser completa
+
+### 📝 Historial completo
+Ver [CHANGELOG.md](CHANGELOG.md) para el historial detallado de cambios.
 
 ## 📱 Uso
 
