@@ -3,6 +3,8 @@
 Web system for team registration in the 2025 Volleyball Tournament. Developed with PHP, MySQL and JavaScript.
 
 [![Español](https://img.shields.io/badge/Español-README.md-red)](README.md)
+[![Version](https://img.shields.io/badge/version-v0.1.3-green)](CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-view%20history-blue)](CHANGELOG.md)
 
 ## 📋 What is it?
 
@@ -14,6 +16,7 @@ This is a web system that allows teams to register to participate in the 2025 Vo
 - Select the game system (6:0, 4:2, 5:1)
 - Add members with their positions
 - Choose jersey color (with duplicate validation)
+- View all registered teams organized by cycles
 
 ## 🚀 Installation
 
@@ -26,28 +29,28 @@ This is a web system that allows teams to register to participate in the 2025 Vo
 ### Steps
 
 1. **Clone the repository**
-   ```bash
+   \`\`\`bash
    git clone https://github.com/CapriaFranco/vit-gestor.git
    cd vit-gestor
-   ```
+   \`\`\`
 
 2. **Configure the database**
-   ```bash
+   \`\`\`bash
    # Copy the example file
    cp php/db.example.php php/db.php
    
    # Edit with your data
    nano php/db.php
-   ```
+   \`\`\`
 
 3. **Import the database**
-   ```sql
+   \`\`\`sql
    -- For local development
    mysql -u root -p < sql/db.sql
    
    -- For InfinityFree
    mysql -u usuario -p < sql/db-infinityfree.sql
-   ```
+   \`\`\`
 
 4. **Configure the server**
    - **Local**: Place in `htdocs/vit-gestor/`
@@ -82,7 +85,7 @@ This is a web system that allows teams to register to participate in the 2025 Vo
 
 ## 📁 Structure
 
-```
+\`\`\`
 vit-gestor/
 ├── index.php              # Entry point
 ├── .htaccess              # Route configuration
@@ -95,34 +98,35 @@ vit-gestor/
 ├── pages/
 │   ├── register/          # Registration page
 │   ├── registered/        # Success page
+│   ├── registered-teams/  # Registered teams view
 │   └── err/               # 404 error page
 ├── assets/                # Images and fonts
 ├── scripts/               # JavaScript
 ├── styles/                # CSS
 └── sql/                   # Database scripts
-```
+\`\`\`
 
 ## 🔧 Configuration
 
 ### Local database (XAMPP)
 
-```php
+\`\`\`php
 // php/db.php
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "vit_gestor_db";
-```
+\`\`\`
 
 ### InfinityFree database
 
-```php
+\`\`\`php
 // php/db.php
 $servername = "sql309.infinityfree.com";
 $username = "tu_usuario";
 $password = "tu_password";
 $dbname = "tu_base_datos";
-```
+\`\`\`
 
 ## 🎨 Features
 
@@ -132,13 +136,43 @@ $dbname = "tu_base_datos";
 - **Dynamic position system** according to game system
 - **Custom success and error pages**
 - **Friendly routing** with .htaccess
+- **Smart WhatsApp links** (auto-detects mobile/desktop)
+- **Cross-browser compatibility** optimized with autoprefixer
+- **Pattern validations** for Spanish special characters
+- **Field length configuration** (3-100 chars for team, 4-100 for members/color)
+- **Registered teams view** organized by cycles (Basic/Superior)
+- **Visual indicators** for substitutes and captains
+- **Real-time statistics counters**
+- **Consistent design** with registration form
+- **Optimized tables** with horizontal scroll
+- **Improved spacing** in forms for mobile devices
+
+## 📊 Versions
+
+### 🚀 Current: v0.1.3
+- ✅ Registered teams page with organization by cycles
+- ✅ Visual indicators for substitutes and captains
+- ✅ Real-time statistics counters
+- ✅ Consistent design with registration form
+- ✅ Optimized tables with horizontal scroll
+- ✅ Improved spacing in forms for mobile devices
+
+### 📝 Complete history
+See [CHANGELOG.md](CHANGELOG.md) for detailed change history.
 
 ## 📱 Usage
 
+### Registration
 1. Access the main page
 2. Complete the form step by step
 3. Submit the registration
 4. Receive success confirmation
+
+### View Registered Teams
+1. Access `/teams` to view all registered teams
+2. Teams are organized by cycles (Basic/Superior)
+3. View team details, members, and positions
+4. Use the legend to understand position indicators
 
 ## 🤝 Contributing
 

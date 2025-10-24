@@ -21,6 +21,9 @@
     elseif ($url == 'registered' || $url == 'registered/') { 
         include __DIR__ . '/pages/registered/index.php'; 
     }
+    elseif ($url == 'teams' || $url == 'teams/') { 
+        include __DIR__ . '/pages/registered-teams/index.php'; 
+    }
     else { 
         include __DIR__ . '/pages/err/404.php'; 
     }

@@ -153,6 +153,20 @@
                         <tbody id="bodyIntegrantes"></tbody>
                     </table>
                 </div>
+                <div class="infoIcons flex-row">
+                    <div class="infoIcon flex-row">
+                        <img src="<?php echo buildPath($base_path, 'assets/img/icons/info.svg'); ?>" alt="" class="icon" loading="lazy" decoding="async">
+                        <p>= Campo obligatorio</p>
+                    </div>
+                    <div class="infoIcon flex-row">
+                        <img src="<?php echo buildPath($base_path, 'assets/img/icons/circle-slash.svg'); ?>" alt="" class="icon" loading="lazy" decoding="async">
+                        <p>= Sin posición</p>
+                    </div>
+                    <div class="infoIcon flex-row">
+                        <img src="<?php echo buildPath($base_path, 'assets/img/icons/refresh-ccw.svg'); ?>" alt="" class="icon" loading="lazy" decoding="async">
+                        <p>= Suplente</p>
+                    </div>
+                </div>
             </div>
 
             <div id="colorDiv" class="flex-col dn">
@@ -164,8 +178,17 @@
                 <input type="text" name="color_remera" id="color_remera" placeholder="Ej: Rojo, Azul, Verde" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ ]+" title="Ingrese el color de la remera del equipo. Solo se permiten letras A-Z o a-z" maxlength="100" minlength="4" required>
                 <div id="coloresUsados"></div>
             </div>
-
+             
             <button type="submit" id="btnSubmit" class="dn">Registrar equipo</button>
+
+            <div id="equiposRegistrados" class="teams-link-container">
+                <p>Ver equipos ya registrados <a href="teams/" class="btn btn-outline">aquí</a></p>
+            </div>
+
+            <div class="gh-repo-container">
+                <img src="<?php echo buildPath($base_path, 'assets/img/icons/github.svg'); ?>" alt="Github repositorio icon" class="icon" loading="lazy" decoding="async">
+                <p>Ver repositorio <a href="https://github.com/CapriaFranco/vit-gestor" target="_blank" class="btn-repo">aquí</a></p>
+            </div>
         </form>
     </main>
     <script src="<?php echo buildPath($base_path, 'scripts/main.js'); ?>"></script>

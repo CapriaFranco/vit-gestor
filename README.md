@@ -3,7 +3,7 @@
 Sistema web para el registro de equipos en el Torneo de Voley 2025. Desarrollado con PHP, MySQL y JavaScript.
 
 [![English](https://img.shields.io/badge/English-README.en.md-blue)](README.en.md)
-[![Version](https://img.shields.io/badge/version-v0.1.2-green)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v0.1.3-green)](CHANGELOG.md)
 [![Changelog](https://img.shields.io/badge/changelog-ver%20historial-blue)](CHANGELOG.md)
 
 ## 📋 ¿Qué es?
@@ -16,6 +16,7 @@ Este es un sistema web que permite a los equipos registrarse para participar en 
 - Seleccionar el sistema de juego (6:0, 4:2, 5:1)
 - Agregar los integrantes con sus posiciones
 - Elegir el color de remera (con validación de duplicados)
+- Ver todos los equipos registrados organizados por ciclos
 
 ## 🚀 Instalación
 
@@ -28,28 +29,28 @@ Este es un sistema web que permite a los equipos registrarse para participar en 
 ### Pasos
 
 1. **Clona el repositorio**
-   ```bash
+   \`\`\`bash
    git clone https://github.com/CapriaFranco/vit-gestor.git
    cd vit-gestor
-   ```
+   \`\`\`
 
 2. **Configura la base de datos**
-   ```bash
+   \`\`\`bash
    # Copia el archivo de ejemplo
    cp php/db.example.php php/db.php
    
    # Edita con tus datos
    nano php/db.php
-   ```
+   \`\`\`
 
 3. **Importa la base de datos**
-   ```sql
+   \`\`\`sql
    -- Para desarrollo local
    mysql -u root -p < sql/db.sql
    
    -- Para InfinityFree
    mysql -u usuario -p < sql/db-infinityfree.sql
-   ```
+   \`\`\`
 
 4. **Configura el servidor**
    - **Local**: Coloca en `htdocs/vit-gestor/`
@@ -84,7 +85,7 @@ Este es un sistema web que permite a los equipos registrarse para participar en 
 
 ## 📁 Estructura
 
-```
+\`\`\`
 vit-gestor/
 ├── index.php              # Punto de entrada
 ├── .htaccess              # Configuración de rutas
@@ -97,34 +98,35 @@ vit-gestor/
 ├── pages/
 │   ├── register/          # Página de registro
 │   ├── registered/        # Página de éxito
+│   ├── registered-teams/  # Visualización de equipos registrados
 │   └── err/               # Página de error 404
 ├── assets/                # Imágenes y fuentes
 ├── scripts/               # JavaScript
 ├── styles/                # CSS
 └── sql/                   # Scripts de base de datos
-```
+\`\`\`
 
 ## 🔧 Configuración
 
 ### Base de datos local (XAMPP)
 
-```php
+\`\`\`php
 // php/db.php
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "vit_gestor_db";
-```
+\`\`\`
 
 ### Base de datos InfinityFree
 
-```php
+\`\`\`php
 // php/db.php
 $servername = "sql309.infinityfree.com";
 $username = "tu_usuario";
 $password = "tu_password";
 $dbname = "tu_base_datos";
-```
+\`\`\`
 
 ## 🎨 Características
 
@@ -138,25 +140,37 @@ $dbname = "tu_base_datos";
 - **Compatibilidad cross-browser** optimizada con autoprefixer
 - **Validaciones de patrones** para caracteres especiales en español
 - **Longitud de campos** configurada (3-100 caracteres para equipo, 4-100 para integrantes/color)
+- **Visualización de equipos registrados** organizados por ciclos (Básico/Superior)
+- **Indicadores visuales** para suplentes y capitanes
+- **Contadores de estadísticas** de equipos y personas registradas
+- **Tablas optimizadas** con scroll horizontal en móviles
 
 ## 📊 Versiones
 
-### 🚀 Actual: v0.1.2
-- ✅ Compatibilidad mejorada para todos los navegadores
-- ✅ Enlaces de WhatsApp inteligentes
-- ✅ Sistema de detección automática de dispositivos
-- ✅ Validaciones de patrones para texto en español
-- ✅ Adaptación CSS cross-browser completa
+### 🚀 Actual: v0.1.3
+- ✅ Página de equipos registrados con organización por ciclos
+- ✅ Indicadores visuales para suplentes y capitanes
+- ✅ Contadores de estadísticas en tiempo real
+- ✅ Diseño consistente con el formulario de registro
+- ✅ Tablas optimizadas con scroll horizontal
+- ✅ Espaciado mejorado en formularios para móviles
 
 ### 📝 Historial completo
 Ver [CHANGELOG.md](CHANGELOG.md) para el historial detallado de cambios.
 
 ## 📱 Uso
 
+### Registro
 1. Accede a la página principal
 2. Completa el formulario paso a paso
 3. Envía el registro
 4. Recibe confirmación de éxito
+
+### Ver equipos registrados
+1. Accede a `/teams` para ver todos los equipos registrados
+2. Los equipos están organizados por ciclos (Básico/Superior)
+3. Visualiza detalles de equipos, integrantes y posiciones
+4. Usa la leyenda para entender los indicadores de posición
 
 ## 🤝 Contribución
 
@@ -170,6 +184,6 @@ Ver [CHANGELOG.md](CHANGELOG.md) para el historial detallado de cambios.
 
 **Capria Franco** - [GitHub](https://github.com/CapriaFranco)
 
----
+--- 
 
 ⭐ **¡Dale una estrella si te gusta el proyecto!** ⭐

@@ -1,4 +1,3 @@
-
 CREATE TABLE equipos (
   id INT AUTO_INCREMENT PRIMARY KEY,
   curso ENUM('1ro', '2do', '3ro', '4to', '5to', '6to', '7mo') NOT NULL,

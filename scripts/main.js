@@ -4,16 +4,16 @@ let posicionesSeleccionadas = new Array(9).fill("") // Almacena las posiciones s
 
 // Función para obtener la ruta base del proyecto
 function getBasePath() {
-  const path = window.location.pathname;
-  const pathParts = path.split('/');
-  const projectIndex = pathParts.findIndex(part => part === 'vit-gestor');
-  
+  const path = window.location.pathname
+  const pathParts = path.split("/")
+  const projectIndex = pathParts.findIndex((part) => part === "vit-gestor")
+
   if (projectIndex !== -1) {
     // En local (con carpeta vit-gestor)
-    return '/' + pathParts.slice(1, projectIndex + 1).join('/');
+    return "/" + pathParts.slice(1, projectIndex + 1).join("/")
   } else {
     // En InfinityFree (archivos en raíz)
-    return '';
+    return ""
   }
 }
 
@@ -162,8 +162,11 @@ function mostrarIntegrantes() {
     inp.name = "integrante_" + i
     inp.placeholder = i === 1 ? "Nombre del capitán" : `Nombre del integrante ${i}`
     inp.pattern = "[A-Za-záéíóúÁÉÍÓÚñÑ ]+"
-    inp.title = i === 1 ? "Ingrese el nombre del capitán. Solo se permiten letras A-Z o a-z" : `Ingrese el nombre del integrante ${i}. Solo se permiten letras A-Z o a-z`
-    inp.maxLength  = 100
+    inp.title =
+      i === 1
+        ? "Ingrese el nombre del capitán. Solo se permiten letras A-Z o a-z"
+        : `Ingrese el nombre del integrante ${i}. Solo se permiten letras A-Z o a-z`
+    inp.maxLength = 100
     inp.minLength = 4
     inp.required = i <= cantidad
 
@@ -188,6 +191,18 @@ function mostrarIntegrantes() {
       iconImg.src = getBasePath() + "/assets/img/icons/circle-slash.svg"
       iconImg.alt = "6:0 no lleva posiciones"
       iconImg.title = "6:0 no lleva posiciones"
+      iconImg.loading = "lazy"
+      iconImg.decoding = "async"
+      posDiv.appendChild(iconImg)
+      tdPos.appendChild(posDiv)
+    } else if (i > cantidad) {
+      // Players beyond the required amount are substitutes
+      const posDiv = document.createElement("div")
+      posDiv.className = "position-disabled"
+      const iconImg = document.createElement("img")
+      iconImg.src = getBasePath() + "/assets/img/icons/refresh-ccw.svg"
+      iconImg.alt = "Suplente"
+      iconImg.title = "Suplente"
       iconImg.loading = "lazy"
       iconImg.decoding = "async"
       posDiv.appendChild(iconImg)
