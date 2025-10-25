@@ -1,14 +1,14 @@
 # 🏐 Volleyball Tournament 2025 - Registration System
 
-Web system for team registration in the Volleyball Tournament 2025. Built with PHP, MySQL and JavaScript.
+Web system for team registration in the 2025 Volleyball Tournament. Developed with PHP, MySQL and JavaScript.
 
 [![Español](https://img.shields.io/badge/Español-README.md-blue)](README.md)
-[![Version](https://img.shields.io/badge/version-v0.1.4-green)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v0.1.5-green)](CHANGELOG.md)
 [![Changelog](https://img.shields.io/badge/changelog-view%20history-blue)](CHANGELOG.md)
 
 ## 📋 What is it?
 
-This is a web system that allows teams to register to participate in the Volleyball Tournament 2025. Teams can:
+This is a web system that allows teams to register to participate in the 2025 Volleyball Tournament. Teams can:
 
 - Select their grade (1st to 7th)
 - Choose their division (A, B, C for basic; 1st, 2nd for advanced)
@@ -49,7 +49,7 @@ This is a web system that allows teams to register to participate in the Volleyb
    mysql -u root -p < sql/db.sql
    
    -- For InfinityFree
-   mysql -u username -p < sql/db-infinityfree.sql
+   mysql -u user -p < sql/db-infinityfree.sql
    \`\`\`
 
 4. **Configure the server**
@@ -138,24 +138,21 @@ $dbname = "your_database";
 - **Friendly routing** with .htaccess
 - **Smart WhatsApp links** (automatically detects mobile/desktop)
 - **Cross-browser compatibility** optimized with autoprefixer
-- **Pattern validations** for special Spanish characters
-- **Field length** configured (3-100 chars for team, 4-100 for members/color)
+- **Pattern validations** for special characters in Spanish
+- **Configured field lengths** (3-100 characters for team, 4-100 for members/color)
 - **Registered teams view** organized by cycles (Basic/Advanced)
 - **Visual indicators** for substitutes and captains
 - **Statistics counters** for registered teams and people
 - **Optimized tables** with horizontal scroll on mobile
-- **Complete SEO meta tags** for search engines and social media
-- **Open Graph and Twitter Cards** for social sharing
-- **Optimized social image** (1200x628px) for previews
 
 ## 📊 Versions
 
-### 🚀 Current: v0.1.4
-- ✅ Complete meta tags for SEO and social media
-- ✅ Open Graph and Twitter Cards implemented
-- ✅ Optimized image for social sharing (1200x628px)
-- ✅ Theme color with site primary color (#94d0af)
-- ✅ CSS grid columns error fix
+### 🚀 Current: v0.1.5
+- ✅ Fixed WhatsApp compatibility for meta tags
+- ✅ Additional Open Graph metadata (width, height, type, secure_url, alt)
+- ✅ Absolute URLs instead of relative for better compatibility
+- ✅ Clarification message about using full names in registration
+- ✅ Fixed image extension (.jpg instead of .png)
 
 ### 📝 Complete history
 See [CHANGELOG.md](CHANGELOG.md) for detailed change history.
@@ -174,7 +171,7 @@ See [CHANGELOG.md](CHANGELOG.md) for detailed change history.
 3. View team details, members and positions
 4. Use the legend to understand position indicators
 
-## 🤝 Contributing
+## 🤝 Contribution
 
 1. Fork the project
 2. Create a branch (`git checkout -b feature/new-feature`)

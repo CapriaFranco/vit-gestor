@@ -5,6 +5,42 @@ Todas las notables cambios a este proyecto serán documentadas en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [v0.1.5] - 2025-10-25 - 03:50:00
+
+### 🐛 Corregido
+- **Compatibilidad con WhatsApp**: Corregidas etiquetas meta para compartir en WhatsApp
+  - Cambiada extensión de imagen de `.png` a `.jpg` en og:image
+  - Agregados metadatos específicos requeridos por WhatsApp:
+    * `og:image:width` (1200px)
+    * `og:image:height` (628px)
+    * `og:image:type` (image/jpeg)
+    * `og:image:secure_url` (URL HTTPS)
+    * `og:image:alt` (texto alternativo)
+  - Cambiadas URLs relativas a URLs absolutas con dominio completo
+  - Solucionado problema de caché de WhatsApp con metadatos correctos
+
+### ✨ Mejorado
+- **Validación de nombres**: Agregado mensaje aclaratorio en formulario de registro
+  - Nuevo aviso: "Ingresar apellido y nombre completos. No usar apodos ni abreviaciones."
+  - Ubicado sobre la tabla de integrantes para mejor visibilidad
+  - Estilos consistentes con el diseño del formulario
+
+### 🎨 Diseño
+- **Mensaje informativo**: Nuevo contenedor `.infoCompletTable` con estilos
+  - Fondo semi-transparente con color primario
+  - Bordes redondeados y padding adecuado
+  - Tipografía clara y legible
+
+### 📊 Redes Sociales
+- **Previsualizaciones mejoradas**: Ahora funcionan correctamente en:
+  - ✅ WhatsApp (móvil y web)
+  - ✅ Facebook
+  - ✅ Twitter/X
+  - ✅ LinkedIn
+  - ✅ Telegram
+  - ✅ Otras plataformas que usan Open Graph
+
 ## [v0.1.4] - 2025-10-24 - 19:39:30
 
 ### ✨ Nuevo
