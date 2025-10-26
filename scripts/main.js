@@ -82,6 +82,16 @@ document.getElementById("nombre_equipo").addEventListener("input", () => {
   }, 400)
 })
 
+document.getElementById("color_remera").addEventListener("input", () => {
+  clearTimeout(typingTimer)
+  typingTimer = setTimeout(() => {
+    const colorValue = document.getElementById("color_remera").value
+    if (colorValue && colorValue.length >= 4) {
+      document.getElementById("codigoDiv").classList.remove("dn")
+    }
+  }, 400)
+})
+
 function obtenerPosicionesDisponibles(sistema, posicionesUsadas, ignorarPosicion = "") {
   let posicionesSistema = []
   if (sistema === "4:2") {

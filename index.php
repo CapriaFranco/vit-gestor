@@ -24,6 +24,21 @@
     elseif ($url == 'teams' || $url == 'teams/') { 
         include __DIR__ . '/pages/registered-teams/index.php'; 
     }
+    elseif ($url == 'admin' || $url == 'admin/') { 
+        include __DIR__ . '/pages/admins/index.php'; 
+    }
+    elseif ($url == 'dash' || $url == 'dash/') { 
+        include __DIR__ . '/pages/admins/dashboard/index.php'; 
+    }
+    elseif ($url == 'err/403' || $url == 'err/403/') { 
+        include __DIR__ . '/pages/err/403.php'; 
+    }
+    elseif ($url == 'err/404' || $url == 'err/404/') { 
+        include __DIR__ . '/pages/err/404.php'; 
+    }
+    elseif ($url == 'err/500' || $url == 'err/500/') { 
+        include __DIR__ . '/pages/err/500.php'; 
+    }
     else { 
         include __DIR__ . '/pages/err/404.php'; 
     }

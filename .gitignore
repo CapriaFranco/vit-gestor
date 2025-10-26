@@ -1,5 +1,7 @@
 # Archivo de configuración de base de datos (contiene credenciales)
 php/db.php
+php/password.php
+sql/password.sql
 
 # Archivos del sistema
 .DS_Store

@@ -18,11 +18,25 @@
 
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         // Validar que todos los campos requeridos estén presentes
-        $campos_requeridos = ['curso', 'division', 'nombre_equipo', 'sistema_juego', 'color_remera', 'integrante_1'];
+        $campos_requeridos = ['curso', 'division', 'nombre_equipo', 'sistema_juego', 'color_remera', 'integrante_1', 'codigo_acceso'];
         foreach($campos_requeridos as $campo) {
             if(!isset($_POST[$campo]) || empty($_POST[$campo])) {
                 die("Error: El campo $campo es requerido");
             }
+        }
+        
+        $codigo = $_POST['codigo_acceso'];
+        
+        // Check if code exists and is available
+        $stmt_check = $db->prepare("SELECT id, usado FROM codigos_acceso WHERE codigo = ?");
+        $stmt_check->bind_param("s", $codigo);
+        $stmt_check->execute();
+        $result = $stmt_check->get_result();
+        
+        if ($result->num_rows === 0 || $result->fetch_assoc()['usado'] == 1) {
+            // Code doesn't exist or already used - silently fail
+            echo "<script>window.location.href = '" . buildPath($base_path, '') . "';</script>";
+            exit;
         }
         
         $curso = $_POST['curso'];
@@ -51,6 +65,11 @@
                 $stmt2->execute();
             }
         }
+        
+        $stmt_update = $db->prepare("UPDATE codigos_acceso SET usado = 1, id_equipo = ? WHERE codigo = ?");
+        $stmt_update->bind_param("is", $id_equipo, $codigo);
+        $stmt_update->execute();
+        
         $_SESSION['registro_exitoso'] = true;
         header('Location: ' . buildPath($base_path, 'registered'));
         exit;
@@ -69,7 +88,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Torneo de Voley - Edición 2025</title>
-    <link rel="stylesheet" href="<?php echo buildPath($base_path, 'styles/main.css?v=2'); ?>">
+    <link rel="stylesheet" href="<?php echo buildPath($base_path, 'styles/main.css?v=3'); ?>">
     <link rel="icon" type="image/x-icon" href="<?php echo buildPath($base_path, 'assets/img/favicon.ico'); ?>">
 
     <!-- Updated meta tags with absolute URLs and proper metadata for WhatsApp compatibility -->
@@ -209,6 +228,16 @@
                 <div class="infoRepetirColor"><p>No repetir colores de los equipos ya registrados.</p></div>
                 <div id="coloresUsados"></div>
             </div>
+
+            <div id="codigoDiv" class="flex-col dn">
+                <label>
+                    <img src="<?php echo buildPath($base_path, 'assets/img/icons/shield-question-mark.svg'); ?>" alt="" class="label-icon" loading="lazy" decoding="async">
+                    Código de acceso
+                    <abbr title="Campo obligatorio">*</abbr>
+                </label>
+                <input type="text" name="codigo_acceso" id="codigo_acceso" placeholder="Ej: abcd-1234" pattern="[a-z0-9]{4}-[a-z0-9]{4}" title="Ingrese el código de acceso en formato: aaaa-bbbb (letras minúsculas y números)" maxlength="9" minlength="9" required>
+                <div class="infoRepetirColor"><p>Solicita tu código de acceso al organizador del torneo.</p></div>
+            </div>
              
             <button type="submit" id="btnSubmit" class="dn">Registrar equipo</button>
 
@@ -222,6 +251,6 @@
             </div>
         </form>
     </main>
-    <script src="<?php echo buildPath($base_path, 'scripts/main.js'); ?>"></script>
+    <script src="<?php echo buildPath($base_path, 'scripts/main.js?v=2'); ?>"></script>
 </body>
 </html>

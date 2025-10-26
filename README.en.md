@@ -3,7 +3,7 @@
 Web system for team registration in the 2025 Volleyball Tournament. Developed with PHP, MySQL and JavaScript.
 
 [![Español](https://img.shields.io/badge/Español-README.md-blue)](README.md)
-[![Version](https://img.shields.io/badge/version-v0.1.6-green)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v0.2.2-green)](CHANGELOG.md)
 [![Changelog](https://img.shields.io/badge/changelog-view%20history-blue)](CHANGELOG.md)
 
 ## 📋 What is it?
@@ -94,16 +94,24 @@ vit-gestor/
 │   ├── db.php             # Real configuration (DO NOT upload)
 │   ├── functions.php      # Helper functions
 │   ├── clear_session.php  # Session cleanup
-│   └── colores_ajax.php   # Colors API
+│   ├── colores_ajax.php   # Colors API
+│   └── admin_auth.php     # Database authentication system
 ├── pages/
 │   ├── register/          # Registration page
 │   ├── registered/        # Success page
 │   ├── registered-teams/  # Registered teams view
-│   └── err/               # 404 error page
+│   ├── err/               # Custom error pages (403, 404, 500)
+│   ├── offline/           # Offline page
+│   ├── admin/             # Admin login page
+│   └── dash/              # Dashboard page
 ├── assets/                # Images and fonts
 ├── scripts/               # JavaScript
 ├── styles/                # CSS
+│   ├── admin/             # Complete styles for administration panel
+│   └── main/              # Main styles
 └── sql/                   # Database scripts
+    ├── db.sql             # Main database script
+    └── access_codes.sql   # Database table for access codes
 \`\`\`
 
 ## 🔧 Configuration
@@ -134,7 +142,7 @@ $dbname = "your_database";
 - **Modern interface** with gradients and animations
 - **Real-time validation** of colors
 - **Dynamic position system** according to game system
-- **Custom success and error pages**
+- **Custom success and error pages** (403, 404, 500, offline)
 - **Friendly routing** with .htaccess
 - **Smart WhatsApp links** (automatically detects mobile/desktop)
 - **Cross-browser compatibility** optimized with autoprefixer
@@ -144,16 +152,26 @@ $dbname = "your_database";
 - **Visual indicators** for substitutes and captains
 - **Statistics counters** for registered teams and people
 - **Optimized tables** with horizontal scroll on mobile
+- **Complete administration system** with protected login
+- **Dashboard for access code management**
+- **Unique code generator** (format: aaaa-bbbb)
+- **New database table for access codes**
+- **Code validation in team registration**
+- **New routes**: /admin/, /dash/, /offline/
+- **Complete styles for administration panel**
+- **Database authentication system** with encrypted passwords
+- **Custom error pages** (403, 404, 500)
+- **ErrorDocument configuration** in .htaccess
 
 ## 📊 Versions
 
-### 🚀 Current: v0.1.6
-- ✅ Fixed WhatsApp compatibility for meta tags
-- ✅ Additional Open Graph metadata (width, height, type, secure_url, alt)
-- ✅ Absolute URLs instead of relative for better compatibility
-- ✅ Clarification message about using full names in registration
-- ✅ Added warning about not repeating colors from already registered teams
-- ✅ Informative message in jersey color section of registration form
+### 🚀 Current: v0.2.2
+- ✅ Custom error pages (403, 500)
+- ✅ Database authentication system
+- ✅ Encrypted password with password_hash()
+- ✅ ErrorDocument configuration in .htaccess
+- ✅ Dashboard redirect fix
+- ✅ Code table optimization
 
 ### 📝 Complete history
 See [CHANGELOG.md](CHANGELOG.md) for detailed change history.

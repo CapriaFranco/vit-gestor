@@ -5,6 +5,107 @@ Todas las notables cambios a este proyecto serán documentadas en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.2.2] - 2025-10-26 - 00:44:00
+
+### 🔐 Sistema de Autenticación Mejorado
+- **Base de datos para contraseña**
+  - Nueva tabla `admin` para almacenar contraseña encriptada
+  - Migración de contraseña hardcodeada a base de datos
+  - Uso de `password_hash()` y `password_verify()` para seguridad
+  - Archivo temporal para registrar contraseña inicial
+
+### 🚨 Páginas de Error Personalizadas
+- **Nuevas páginas de error**
+  - Página 403 (Acceso Prohibido)
+  - Página 500 (Error Interno del Servidor)
+  - Diseño consistente con página 404 existente
+  
+- **Configuración de ErrorDocument**
+  - Agregados ErrorDocument 403, 404, 500 en .htaccess
+  - URLs absolutas para manejo correcto de errores
+  - Rutas amigables en index.php para páginas de error
+
+### 🔧 Correcciones del Dashboard
+- **Redirect corregido**
+  - Dashboard ahora permanece en `/dash/` al generar códigos
+  - Eliminado redirect incorrecto a index
+  - Mejor experiencia de usuario en panel de administración
+
+### 🎨 Optimizaciones de Interfaz
+- **Tabla de códigos optimizada**
+  - Reducido ancho de columna "Código" para mejor uso del espacio
+  - Mejora en la legibilidad de la tabla
+  - Diseño más compacto y eficiente
+
+### 📊 Base de Datos
+- Actualización de `sql/db.sql` con tabla `admin`
+- Actualización de `sql/db-infinityfree.sql` con tabla `admin`
+- Estructura optimizada para autenticación segura
+
+## [v0.2.1] - 2025-10-25 - 23:46:00
+
+### 🔧 Correcciones del Panel de Administración
+- **Interfaz mejorada**
+  - Agregados estilos completos al input de contraseña en login
+  - Corregido espaciado en tabla de códigos (columnas separadas correctamente)
+  - Reducido ancho de columna "Código" para optimizar espacio
+  
+- **Funcionalidad corregida**
+  - Prevenida regeneración automática de códigos al recargar página
+  - Corregido redirect de logout para evitar error PHP
+  - Reducido tamaño del texto del código generado
+  
+- **Tabla de códigos reestructurada**
+  - Nueva estructura: ID | [ESTADO] CODIGO | [ID EQUIPO] EQUIPO
+  - Indicadores visuales de estado (cuadrados verde/rojo)
+  - Verde: código disponible | Rojo: código usado
+  - Formato de equipo: "#07 Nombre del equipo"
+  
+- **Mensajes consolidados**
+  - Código y botón copiar movidos a alerta de éxito
+  - Botón generar reposicionado arriba
+  - Mensaje de éxito mostrado debajo
+  
+- **Recursos**
+  - Agregado ícono copy.svg para botón de copiar
+  - Completados estilos CSS del panel de administración
+
+## [v0.2.0] - 2025-10-25 - 22:58:00
+
+### 🔐 Sistema de Administración
+- **Panel de administración completo**
+  - Login con contraseña protegida
+  - Dashboard para gestión de códigos
+  - Generador de códigos de acceso únicos
+  - Formato de código: `aaaa-bbbb` (8 caracteres a-z 0-9, minúsculas)
+  
+### 🎫 Sistema de Códigos de Acceso
+- **Nueva tabla en base de datos**: `codigos_acceso`
+  - Almacena códigos generados
+  - Rastrea uso de códigos (usado/disponible)
+  - Vincula códigos con equipos registrados
+  
+- **Validación en registro de equipos**
+  - Campo obligatorio de código de acceso
+  - Validación silenciosa: si el código no existe o ya fue usado, limpia el formulario
+  - Marca código como usado al registrar equipo exitosamente
+
+### 🛣️ Nuevas Rutas
+- `/admin/` - Acceso al panel de administración
+- `/dash/` - Dashboard de administración
+- `/offline/` - Página de error sin conexión
+
+### 🎨 Estilos
+- Estilos para panel de administración
+- Estilos para generador de códigos
+- Estilos para tabla de códigos
+- Badges de estado (disponible/usado)
+- Mensajes de error y éxito
+
+### 📊 Base de Datos
+- Actualización de `sql/db.sql` con tabla `codigos_acceso`
+- Actualización de `sql/db-infinityfree.sql` con tabla `codigos_acceso`
+
 ## [v0.1.6] - 2025-10-25 - 21:05:00
 
 ### ✨ Mejorado
