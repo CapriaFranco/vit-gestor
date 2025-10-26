@@ -5,6 +5,20 @@ Todas las notables cambios a este proyecto serán documentadas en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.2.4] - 2025-10-26 - 17:44:00
+
+### ✨ Nuevo
+- **Validación de teléfono mejorada**
+  - Ahora el campo acepta formatos `XX XXXX-XXXX` o `XXX XXXX-XXXX`
+  - Validación estricta con regex: solo un espacio y un guion en posiciones fijas  
+  - Mensaje de error más claro: `"Formato válido: XX XXXX-XXXX o XXX XXXX-XXXX (solo números, un espacio y un guion)"`  
+  - Implementado `minlength="12"` y `maxlength="13"`
+
+### 📱 Interfaz de Registro
+- Campo de teléfono del capitán ubicado debajo del nombre del capitán  
+- Mantiene validación estricta y formato uniforme  
+- Previene ingreso de caracteres no válidos o múltiples guiones
+
 ## [v0.2.3] - 2025-10-26 - 16:04:00
 
 ### ✨ Nuevo

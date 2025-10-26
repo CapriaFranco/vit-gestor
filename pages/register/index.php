@@ -45,7 +45,7 @@
         $sistema = $_POST['sistema_juego'];
         $color = $_POST['color_remera'];
         $capitan = $_POST['integrante_1'];
-        $telefono = $_POST['telefono'] ?? NULL;
+        $telefono = $_POST['telefono'];
 
         $stmt=$db->prepare("INSERT INTO equipos (curso,division,nombre_equipo,sistema_juego,color_remera,capitan,telefono) VALUES (?,?,?,?,?,?,?)");
         $stmt->bind_param("sssssss",$curso,$division,$nombre_equipo,$sistema,$color,$capitan,$telefono);
@@ -223,7 +223,7 @@
                         Teléfono del capitán
                         <abbr title="Campo obligatorio">*</abbr>
                     </label>
-                    <input type="tel" name="telefono" id="telefono" placeholder="11 3126-4254" pattern="[0-9 -]+" title="Ingrese el número de teléfono. Solo se permiten números, espacios y guiones" maxlength="20" required>
+                    <input type="tel" name="telefono" id="telefono" placeholder="11 3126-4254" pattern="^[0-9]{2,3}( [0-9]{4}-[0-9]{4})?$" title="Ingrese el número de teléfono. Formato válido: XX XXXX-XXXX o XXX XXXX-XXXX (solo números, un espacio y un guion)" minlengt="12" maxlength="13" required>
                 </div>
             </div>
 
