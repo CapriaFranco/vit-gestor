@@ -3,7 +3,7 @@
 Web system for team registration in the 2025 Volleyball Tournament. Developed with PHP, MySQL and JavaScript.
 
 [![Español](https://img.shields.io/badge/Español-README.md-blue)](README.md)
-[![Version](https://img.shields.io/badge/version-v0.2.2-green)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v0.2.4-green)](CHANGELOG.md)
 [![Changelog](https://img.shields.io/badge/changelog-view%20history-blue)](CHANGELOG.md)
 
 ## 📋 What is it?
@@ -29,28 +29,28 @@ This is a web system that allows teams to register to participate in the 2025 Vo
 ### Steps
 
 1. **Clone the repository**
-   \`\`\`bash
+   ```bash
    git clone https://github.com/CapriaFranco/vit-gestor.git
    cd vit-gestor
-   \`\`\`
+   ```
 
 2. **Configure the database**
-   \`\`\`bash
+   ```bash
    # Copy the example file
    cp php/db.example.php php/db.php
    
    # Edit with your data
    nano php/db.php
-   \`\`\`
+   ```
 
 3. **Import the database**
-   \`\`\`sql
+   ```sql
    -- For local development
    mysql -u root -p < sql/db.sql
    
    -- For InfinityFree
    mysql -u user -p < sql/db-infinityfree.sql
-   \`\`\`
+   ```
 
 4. **Configure the server**
    - **Local**: Place in `htdocs/vit-gestor/`
@@ -85,7 +85,7 @@ This is a web system that allows teams to register to participate in the 2025 Vo
 
 ## 📁 Structure
 
-\`\`\`
+```
 vit-gestor/
 ├── index.php              # Entry point
 ├── .htaccess              # Route configuration
@@ -112,29 +112,29 @@ vit-gestor/
 └── sql/                   # Database scripts
     ├── db.sql             # Main database script
     └── access_codes.sql   # Database table for access codes
-\`\`\`
+```
 
 ## 🔧 Configuration
 
 ### Local database (XAMPP)
 
-\`\`\`php
+```php
 // php/db.php
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "vit_gestor_db";
-\`\`\`
+```
 
 ### InfinityFree database
 
-\`\`\`php
+```php
 // php/db.php
 $servername = "sql309.infinityfree.com";
 $username = "your_username";
 $password = "your_password";
 $dbname = "your_database";
-\`\`\`
+```
 
 ## 🎨 Features
 
@@ -165,13 +165,11 @@ $dbname = "your_database";
 
 ## 📊 Versions
 
-### 🚀 Current: v0.2.2
-- ✅ Custom error pages (403, 500)
-- ✅ Database authentication system
-- ✅ Encrypted password with password_hash()
-- ✅ ErrorDocument configuration in .htaccess
-- ✅ Dashboard redirect fix
-- ✅ Code table optimization
+### 🚀 Current: v0.2.4
+- ✅ Improved phone number validation  
+- ✅ New pattern for Argentine format (e.g., 11 3126-4254)  
+- ✅ Min/max length enforcement (12–13 characters)  
+- ✅ Clearer error message in registration form
 
 ### 📝 Complete history
 See [CHANGELOG.md](CHANGELOG.md) for detailed change history.

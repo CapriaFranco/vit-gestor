@@ -3,7 +3,7 @@
 Sistema web para el registro de equipos en el Torneo de Voley 2025. Desarrollado con PHP, MySQL y JavaScript.
 
 [![English](https://img.shields.io/badge/English-README.en.md-blue)](README_EN.md)
-[![Version](https://img.shields.io/badge/version-v0.2.2-green)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v0.2.4-green)](CHANGELOG.md)
 [![Changelog](https://img.shields.io/badge/changelog-ver%20historial-blue)](CHANGELOG.md)
 
 ## 📋 ¿Qué es?
@@ -29,28 +29,28 @@ Este es un sistema web que permite a los equipos registrarse para participar en 
 ### Pasos
 
 1. **Clona el repositorio**
-   \`\`\`bash
+   ```bash
    git clone https://github.com/CapriaFranco/vit-gestor.git
    cd vit-gestor
-   \`\`\`
+   ```
 
 2. **Configura la base de datos**
-   \`\`\`bash
+   ```bash
    # Copia el archivo de ejemplo
    cp php/db.example.php php/db.php
    
    # Edita con tus datos
    nano php/db.php
-   \`\`\`
+   ```
 
 3. **Importa la base de datos**
-   \`\`\`sql
+   ```sql
    -- Para desarrollo local
    mysql -u root -p < sql/db.sql
    
    -- Para InfinityFree
    mysql -u usuario -p < sql/db-infinityfree.sql
-   \`\`\`
+   ```
 
 4. **Configura el servidor**
    - **Local**: Coloca en `htdocs/vit-gestor/`
@@ -85,7 +85,7 @@ Este es un sistema web que permite a los equipos registrarse para participar en 
 
 ## 📁 Estructura
 
-\`\`\`
+```
 vit-gestor/
 ├── index.php              # Punto de entrada
 ├── .htaccess              # Configuración de rutas
@@ -104,29 +104,29 @@ vit-gestor/
 ├── scripts/               # JavaScript
 ├── styles/                # CSS
 └── sql/                   # Scripts de base de datos
-\`\`\`
+```
 
 ## 🔧 Configuración
 
 ### Base de datos local (XAMPP)
 
-\`\`\`php
+```php
 // php/db.php
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "vit_gestor_db";
-\`\`\`
+```
 
 ### Base de datos InfinityFree
 
-\`\`\`php
+```php
 // php/db.php
 $servername = "sql309.infinityfree.com";
 $username = "tu_usuario";
 $password = "tu_password";
 $dbname = "tu_base_datos";
-\`\`\`
+```
 
 ## 🎨 Características
 
@@ -154,13 +154,11 @@ $dbname = "tu_base_datos";
 
 ## 📊 Versiones
 
-### 🚀 Actual: v0.2.2
-- ✅ Páginas de error personalizadas (403, 500)
-- ✅ Sistema de autenticación con base de datos
-- ✅ Contraseña encriptada con password_hash()
-- ✅ Configuración de ErrorDocument en .htaccess
-- ✅ Corrección de redirect del dashboard
-- ✅ Optimización de tabla de códigos
+### 🚀 Actual: v0.2.4
+- ✅ Mejora de validación del campo teléfono  
+- ✅ Nuevo patrón para formato argentino (ej: 11 3126-4254)  
+- ✅ Longitud mínima y máxima controlada (12–13 caracteres)  
+- ✅ Mensaje de error más claro en el formulario  
 
 ### 📝 Historial completo
 Ver [CHANGELOG.md](CHANGELOG.md) para el historial detallado de cambios.
