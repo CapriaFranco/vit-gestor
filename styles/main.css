@@ -616,7 +616,7 @@ tbody td select {
   width: 100%;
 }
 
-.infoIcons, .infoCompletTable {
+.infoIcons, .infoCompletTable, .infoRepetirColor {
   width: 100%;
   gap: 1rem;
   -webkit-box-pack: center;
@@ -634,7 +634,10 @@ tbody td select {
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
 }
-.infoCompletTable {
+.infoRepetirColor {
+  margin: 0;
+}
+.infoCompletTable, .infoRepetirColor {
   border: 2px solid var(--color-info);
   -webkit-border-radius: var(--radius-sm);
      -moz-border-radius: var(--radius-sm);
@@ -673,7 +676,7 @@ tbody td select {
   font-size: 0.9rem;
   white-space: nowrap;
 }
-.infoCompletTable p {
+.infoCompletTable p, .infoRepetirColor p {
   font-size: 0.9rem;
 }
 

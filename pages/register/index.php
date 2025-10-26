@@ -206,6 +206,7 @@
                     <abbr title="Campo obligatorio">*</abbr>
                 </label>
                 <input type="text" name="color_remera" id="color_remera" placeholder="Ej: Rojo, Azul, Verde" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ ]+" title="Ingrese el color de la remera del equipo. Solo se permiten letras A-Z o a-z" maxlength="100" minlength="4" required>
+                <div class="infoRepetirColor"><p>No repetir colores de los equipos ya registrados.</p></div>
                 <div id="coloresUsados"></div>
             </div>
              

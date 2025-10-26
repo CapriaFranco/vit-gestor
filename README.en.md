@@ -3,7 +3,7 @@
 Web system for team registration in the 2025 Volleyball Tournament. Developed with PHP, MySQL and JavaScript.
 
 [![Español](https://img.shields.io/badge/Español-README.md-blue)](README.md)
-[![Version](https://img.shields.io/badge/version-v0.1.5-green)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v0.1.6-green)](CHANGELOG.md)
 [![Changelog](https://img.shields.io/badge/changelog-view%20history-blue)](CHANGELOG.md)
 
 ## 📋 What is it?
@@ -147,12 +147,13 @@ $dbname = "your_database";
 
 ## 📊 Versions
 
-### 🚀 Current: v0.1.5
+### 🚀 Current: v0.1.6
 - ✅ Fixed WhatsApp compatibility for meta tags
 - ✅ Additional Open Graph metadata (width, height, type, secure_url, alt)
 - ✅ Absolute URLs instead of relative for better compatibility
 - ✅ Clarification message about using full names in registration
-- ✅ Fixed image extension (.jpg instead of .png)
+- ✅ Added warning about not repeating colors from already registered teams
+- ✅ Informative message in jersey color section of registration form
 
 ### 📝 Complete history
 See [CHANGELOG.md](CHANGELOG.md) for detailed change history.
