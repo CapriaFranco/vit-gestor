@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS equipos (
   sistema_juego ENUM('6:0', '4:2', '5:1') NOT NULL,
   color_remera VARCHAR(50) NOT NULL,
   capitan VARCHAR(100) NOT NULL,
+  telefono VARCHAR(20) DEFAULT NULL,
   fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

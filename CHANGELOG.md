@@ -5,6 +5,20 @@ Todas las notables cambios a este proyecto serán documentadas en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.2.3] - 2025-10-26 - 16:04:00
+
+### ✨ Nuevo
+- **Campo de teléfono**: Agregado campo de teléfono del capitán en formulario de registro
+  - Ubicado debajo del nombre del capitán en la tabla de integrantes
+  - Placeholder de ejemplo: "11 3126-4254"
+  - Validación de formato: solo números, espacios y guiones
+  - Campo obligatorio
+  - Almacenado en tabla `equipos` con columna `telefono`
+
+### 📊 Base de Datos
+- Actualización de `sql/db.sql` con columna `telefono` en tabla `equipos`
+- Actualización de `sql/db-infinityfree.sql` con columna `telefono` en tabla `equipos`
+
 ## [v0.2.2] - 2025-10-26 - 00:44:00
 
 ### 🔐 Sistema de Autenticación Mejorado

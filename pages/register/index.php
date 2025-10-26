@@ -18,7 +18,7 @@
 
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         // Validar que todos los campos requeridos estén presentes
-        $campos_requeridos = ['curso', 'division', 'nombre_equipo', 'sistema_juego', 'color_remera', 'integrante_1', 'codigo_acceso'];
+        $campos_requeridos = ['curso', 'division', 'nombre_equipo', 'sistema_juego', 'color_remera', 'integrante_1', 'telefono', 'codigo_acceso'];
         foreach($campos_requeridos as $campo) {
             if(!isset($_POST[$campo]) || empty($_POST[$campo])) {
                 die("Error: El campo $campo es requerido");
@@ -45,9 +45,10 @@
         $sistema = $_POST['sistema_juego'];
         $color = $_POST['color_remera'];
         $capitan = $_POST['integrante_1'];
+        $telefono = $_POST['telefono'] ?? NULL;
 
-        $stmt=$db->prepare("INSERT INTO equipos (curso,division,nombre_equipo,sistema_juego,color_remera,capitan) VALUES (?,?,?,?,?,?)");
-        $stmt->bind_param("ssssss",$curso,$division,$nombre_equipo,$sistema,$color,$capitan);
+        $stmt=$db->prepare("INSERT INTO equipos (curso,division,nombre_equipo,sistema_juego,color_remera,capitan,telefono) VALUES (?,?,?,?,?,?,?)");
+        $stmt->bind_param("sssssss",$curso,$division,$nombre_equipo,$sistema,$color,$capitan,$telefono);
         $stmt->execute();
         $id_equipo=$stmt->insert_id;
 
@@ -190,10 +191,10 @@
                         <thead>
                             <tr>
                                 <th>
-                                    <img src="<?php echo buildPath($base_path, 'assets/img/icons/users-round.svg'); ?>" alt="" class="table-icon" loading="lazy" decoding="async">
+                                    <img src="<?php echo buildPath($base_path, 'assets/img/icons/users-round.svg'); ?>" alt="Numero" class="table-icon" loading="lazy" decoding="async">
                                 </th>
                                 <th>
-                                    <img src="<?php echo buildPath($base_path, 'assets/img/icons/a-large-small.svg'); ?>" alt="" class="table-icon" loading="lazy" decoding="async">
+                                    <img src="<?php echo buildPath($base_path, 'assets/img/icons/a-large-small.svg'); ?>" alt="Nombre" class="table-icon" loading="lazy" decoding="async">
                                     Nombre
                                 </th>
                                 <th>Pos.</th>
@@ -215,6 +216,14 @@
                         <img src="<?php echo buildPath($base_path, 'assets/img/icons/refresh-ccw.svg'); ?>" alt="" class="icon" loading="lazy" decoding="async">
                         <p>= Suplente</p>
                     </div>
+                </div>
+                <div class="telefono-capitan-container">
+                    <label>
+                        <img src="<?php echo buildPath($base_path, 'assets/img/icons/smartphone.svg'); ?>" alt="Telefono" class="label-icon" loading="lazy" decoding="async">
+                        Teléfono del capitán
+                        <abbr title="Campo obligatorio">*</abbr>
+                    </label>
+                    <input type="tel" name="telefono" id="telefono" placeholder="11 3126-4254" pattern="[0-9 -]+" title="Ingrese el número de teléfono. Solo se permiten números, espacios y guiones" maxlength="20" required>
                 </div>
             </div>
 
