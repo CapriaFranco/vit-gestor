@@ -82,25 +82,72 @@ document.getElementById("nombre_equipo").addEventListener("input", () => {
   }, 400)
 })
 
+function mostrarTipoCuatroDos() {
+  const sistema = document.getElementById("sistema_juego").value
+  const divTipo = document.getElementById("divTipoCuatroDos")
+  const tablaIntegrantes = document.getElementById("tablaIntegrantes")
+  const telefonoDiv = document.getElementById("telefonoDiv")
+  const colorDiv = document.getElementById("colorDiv")
+  const codigoDiv = document.getElementById("codigoDiv")
+
+  // Hide subsequent sections when changing sistema
+  tablaIntegrantes.classList.add("dn")
+  telefonoDiv.classList.add("dn")
+  colorDiv.classList.add("dn")
+  codigoDiv.classList.add("dn")
+  document.getElementById("btnSubmit").classList.add("dn")
+
+  if (sistema === "4:2") {
+    // Show tipo selection for 4:2
+    divTipo.classList.remove("dn")
+    // Reset tipo selection
+    document.getElementById("tipo_cuatro_dos").value = ""
+    // Make tipo_cuatro_dos required
+    document.getElementById("tipo_cuatro_dos").required = true
+  } else {
+    // Hide tipo selection for other systems
+    divTipo.classList.add("dn")
+    document.getElementById("tipo_cuatro_dos").required = false
+    // Show table immediately for 6:0 and 5:1
+    if (sistema === "6:0" || sistema === "5:1") {
+      mostrarIntegrantes()
+    }
+  }
+}
+
 document.getElementById("color_remera").addEventListener("input", () => {
   clearTimeout(typingTimer)
   typingTimer = setTimeout(() => {
     const colorValue = document.getElementById("color_remera").value
     if (colorValue && colorValue.length >= 4) {
       document.getElementById("codigoDiv").classList.remove("dn")
+    } else {
+      document.getElementById("codigoDiv").classList.add("dn")
+      document.getElementById("btnSubmit").classList.add("dn")
     }
   }, 400)
 })
 
-function obtenerPosicionesDisponibles(sistema, posicionesUsadas, ignorarPosicion = "") {
+function obtenerPosicionesDisponibles(sistema, tipoCuatroDos, posicionesUsadas, ignorarPosicion = "") {
   let posicionesSistema = []
+
   if (sistema === "4:2") {
-    posicionesSistema = [
-      { nombre: "Armador", max: 2 },
-      { nombre: "Central", max: 2 },
-      { nombre: "Punta", max: 2 },
-      { nombre: "Libero", max: 1 },
-    ]
+    if (tipoCuatroDos === "c") {
+      // 4:2 con Centrales (armadores)
+      posicionesSistema = [
+        { nombre: "Armador", max: 2 },
+        { nombre: "Central", max: 2 },
+        { nombre: "Punta", max: 2 },
+        { nombre: "Libero", max: 1 },
+      ]
+    } else if (tipoCuatroDos === "o") {
+      // 4:2 con Opuestos
+      posicionesSistema = [
+        { nombre: "Armador", max: 2 },
+        { nombre: "Opuesto", max: 2 },
+        { nombre: "Punta", max: 2 },
+      ]
+    }
   } else if (sistema === "5:1") {
     posicionesSistema = [
       { nombre: "Armador", max: 1 },
@@ -144,9 +191,29 @@ function obtenerPosicionesDisponibles(sistema, posicionesUsadas, ignorarPosicion
 
 function mostrarIntegrantes() {
   const sistema = document.getElementById("sistema_juego").value
+
+  // If 4:2, check if tipo is selected
+  if (sistema === "4:2") {
+    const tipoCuatroDos = document.getElementById("tipo_cuatro_dos").value
+    if (!tipoCuatroDos) {
+      // Don't show table if tipo is not selected
+      return
+    }
+  }
+
   const tbody = document.getElementById("bodyIntegrantes")
   tbody.innerHTML = ""
-  const cantidad = sistema === "6:0" ? 6 : 7
+
+  let cantidad
+  if (sistema === "6:0") {
+    cantidad = 6
+  } else if (sistema === "4:2") {
+    const tipoCuatroDos = document.getElementById("tipo_cuatro_dos").value
+    cantidad = tipoCuatroDos === "o" ? 6 : 7 // 6 for opuestos, 7 for centrales
+  } else {
+    cantidad = 7 // 5:1 has 7 players
+  }
+
   const total = 8
 
   // Resetear posiciones al cambiar sistema
@@ -179,6 +246,8 @@ function mostrarIntegrantes() {
     inp.maxLength = 100
     inp.minLength = 4
     inp.required = i <= cantidad
+
+    inp.addEventListener("input", validarTablaCompleta)
 
     if (i <= cantidad) {
       const iconImg = document.createElement("img")
@@ -232,8 +301,15 @@ function mostrarIntegrantes() {
       // Contar posiciones ya seleccionadas
       const posicionesUsadas = posicionesSeleccionadas.filter((p) => p !== "")
 
+      const tipoCuatroDos = sistema === "4:2" ? document.getElementById("tipo_cuatro_dos").value : null
+
       // Obtener posiciones disponibles, ignorando la posición actual si está seleccionada
-      const posicionesDisponibles = obtenerPosicionesDisponibles(sistema, posicionesUsadas, posicionesSeleccionadas[i])
+      const posicionesDisponibles = obtenerPosicionesDisponibles(
+        sistema,
+        tipoCuatroDos,
+        posicionesUsadas,
+        posicionesSeleccionadas[i],
+      )
 
       posicionesDisponibles.forEach((p) => {
         const opt = document.createElement("option")
@@ -247,6 +323,7 @@ function mostrarIntegrantes() {
         const valorSeleccionado = e.target.value
         posicionesSeleccionadas[i] = valorSeleccionado
         actualizarSelects()
+        validarTablaCompleta()
       })
       tdPos.appendChild(sel)
     }
@@ -256,17 +333,99 @@ function mostrarIntegrantes() {
     tbody.appendChild(tr)
   }
   document.getElementById("tablaIntegrantes").classList.remove("dn")
-  document.getElementById("colorDiv").classList.remove("dn")
   actualizarColores()
-  document.getElementById("btnSubmit").classList.remove("dn")
 }
+
+function validarTablaCompleta() {
+  const sistema = document.getElementById("sistema_juego").value
+
+  let cantidad
+  if (sistema === "6:0") {
+    cantidad = 6
+  } else if (sistema === "4:2") {
+    const tipoCuatroDos = document.getElementById("tipo_cuatro_dos").value
+    cantidad = tipoCuatroDos === "o" ? 6 : 7 // 6 for opuestos, 7 for centrales
+  } else {
+    cantidad = 7 // 5:1 has 7 players
+  }
+
+  let tablaCompleta = true
+
+  // Check all required names
+  for (let i = 1; i <= cantidad; i++) {
+    const nombreInput = document.querySelector(`input[name="integrante_${i}"]`)
+    if (!nombreInput || !nombreInput.value || nombreInput.value.length < 4) {
+      tablaCompleta = false
+      break
+    }
+  }
+
+  // Check all required positions (except for 6:0)
+  if (sistema !== "6:0" && tablaCompleta) {
+    for (let i = 1; i <= cantidad; i++) {
+      const posSelect = document.getElementById(`posicion_${i}`)
+      if (!posSelect || !posSelect.value) {
+        tablaCompleta = false
+        break
+      }
+    }
+  }
+
+  // Show telefono field when table is complete
+  if (tablaCompleta) {
+    document.getElementById("telefonoDiv").classList.remove("dn")
+  } else {
+    document.getElementById("telefonoDiv").classList.add("dn")
+    document.getElementById("colorDiv").classList.add("dn")
+    document.getElementById("codigoDiv").classList.add("dn")
+    document.getElementById("btnSubmit").classList.add("dn")
+  }
+}
+
+document.getElementById("telefono").addEventListener("input", () => {
+  clearTimeout(typingTimer)
+  typingTimer = setTimeout(() => {
+    const telefonoValue = document.getElementById("telefono").value
+    const telefonoPattern = /^[0-9]{2,3} [0-9]{4}-[0-9]{4}$/
+    if (telefonoValue && telefonoPattern.test(telefonoValue)) {
+      document.getElementById("colorDiv").classList.remove("dn")
+      actualizarColores()
+    } else {
+      document.getElementById("colorDiv").classList.add("dn")
+      document.getElementById("codigoDiv").classList.add("dn")
+      document.getElementById("btnSubmit").classList.add("dn")
+    }
+  }, 400)
+})
+
+document.getElementById("codigo_acceso").addEventListener("input", () => {
+  clearTimeout(typingTimer)
+  typingTimer = setTimeout(() => {
+    const codigoValue = document.getElementById("codigo_acceso").value
+    const codigoPattern = /^[a-z0-9]{4}-[a-z0-9]{4}$/
+    if (codigoValue && codigoPattern.test(codigoValue)) {
+      document.getElementById("btnSubmit").classList.remove("dn")
+    } else {
+      document.getElementById("btnSubmit").classList.add("dn")
+    }
+  }, 400)
+})
 
 function actualizarSelects() {
   const sistema = document.getElementById("sistema_juego").value
   if (!sistema || sistema === "6:0") return
 
-  const cantidad = sistema === "6:0" ? 6 : 7
+  let cantidad
+  if (sistema === "4:2") {
+    const tipoCuatroDos = document.getElementById("tipo_cuatro_dos").value
+    cantidad = tipoCuatroDos === "o" ? 6 : 7 // 6 for opuestos, 7 for centrales
+  } else {
+    cantidad = 7 // 5:1 has 7 players
+  }
+
   const posicionesUsadas = posicionesSeleccionadas.filter((p) => p !== "")
+
+  const tipoCuatroDos = sistema === "4:2" ? document.getElementById("tipo_cuatro_dos").value : null
 
   for (let i = 1; i <= cantidad; i++) {
     const sel = document.getElementById("posicion_" + i)
@@ -280,7 +439,7 @@ function actualizarSelects() {
 
     // Obtener posiciones disponibles considerando la posición actual
     // Obtener las posiciones disponibles
-    const posicionesSistema = obtenerPosicionesDisponibles(sistema, posicionesUsadas, valorActual)
+    const posicionesSistema = obtenerPosicionesDisponibles(sistema, tipoCuatroDos, posicionesUsadas, valorActual)
 
     // Solo actualizar si las opciones han cambiado
     const opcionesNuevas = posicionesSistema.sort()

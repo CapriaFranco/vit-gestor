@@ -7,6 +7,7 @@ CREATE TABLE equipos (
   division ENUM('A', 'B', 'C', '1ra', '2da') NOT NULL,
   nombre_equipo VARCHAR(100) NOT NULL,
   sistema_juego ENUM('6:0', '4:2', '5:1') NOT NULL,
+  tipo_cuatro_dos ENUM('c', 'o') DEFAULT NULL,
   color_remera VARCHAR(50) NOT NULL,
   capitan VARCHAR(100) NOT NULL,
   telefono VARCHAR(20) DEFAULT NULL,

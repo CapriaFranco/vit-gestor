@@ -3,7 +3,7 @@
 Web system for team registration in the 2025 Volleyball Tournament. Developed with PHP, MySQL and JavaScript.
 
 [![Español](https://img.shields.io/badge/Español-README.md-blue)](README.md)
-[![Version](https://img.shields.io/badge/version-v0.2.4-green)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v0.2.9-green)](CHANGELOG.md)
 [![Changelog](https://img.shields.io/badge/changelog-view%20history-blue)](CHANGELOG.md)
 
 ## 📋 What is it?
@@ -138,41 +138,50 @@ $dbname = "your_database";
 
 ## 🎨 Features
 
-- **Responsive design** for mobile and desktop
-- **Modern interface** with gradients and animations
-- **Real-time validation** of colors
-- **Dynamic position system** according to game system
-- **Custom success and error pages** (403, 404, 500, offline)
-- **Friendly routing** with .htaccess
-- **Smart WhatsApp links** (automatically detects mobile/desktop)
-- **Cross-browser compatibility** optimized with autoprefixer
-- **Pattern validations** for special characters in Spanish
-- **Configured field lengths** (3-100 characters for team, 4-100 for members/color)
-- **Registered teams view** organized by cycles (Basic/Advanced)
-- **Visual indicators** for substitutes and captains
-- **Statistics counters** for registered teams and people
-- **Optimized tables** with horizontal scroll on mobile
-- **Complete administration system** with protected login
-- **Dashboard for access code management**
-- **Unique code generator** (format: aaaa-bbbb)
-- **New database table for access codes**
-- **Code validation in team registration**
-- **New routes**: /admin/, /dash/, /offline/
-- **Complete styles for administration panel**
-- **Database authentication system** with encrypted passwords
-- **Custom error pages** (403, 404, 500)
-- **ErrorDocument configuration** in .htaccess
+- **Responsive design** for mobile and desktop  
+- **Modern interface** with gradients and animations  
+- **Real-time color validation**  
+- **Dynamic position system** according to the game system  
+- **Custom success and error pages** (403, 404, 500, offline)  
+- **Friendly routing** with .htaccess  
+- **Smart WhatsApp links** (auto-detect mobile/desktop)  
+- **Cross-browser compatibility** optimized with autoprefixer  
+- **Pattern validations** for special characters in Spanish  
+- **Configured field lengths**  
+  * Team name: 3–100 characters  
+  * Members / Color: 4–100 characters  
+- **Registered teams view** organized by cycles (Basic/Advanced)  
+- **Visual indicators** for substitutes and captains  
+- **Statistics counters** for teams and registered people  
+- **Optimized tables** with horizontal scroll on mobile  
+- **Full administration system** with protected login  
+- **Dashboard for managing access codes**  
+- **Unique code generator** (format: aaaa-bbbb)  
+- **New database table for access codes**  
+- **Code validation in team registration**  
+- **Database authentication system** with encrypted passwords  
+- **New routes**: /admin/, /dash/, /offline/, /err/403/, /err/404/, /err/500/  
+- **Custom error pages** with consistent design  
+- **Admin statistics module**  
+  * Total teams and players  
+  * Distribution by cycles  
+  * Most used colors  
+  * Recently registered teams  
+- **Dynamic filters and sorting** in code table  
+- **Improved UI and spacing** in admin panel  
 
 ## 📊 Versions
 
-### 🚀 Current: v0.2.4
-- ✅ Improved phone number validation  
-- ✅ New pattern for Argentine format (e.g., 11 3126-4254)  
-- ✅ Min/max length enforcement (12–13 characters)  
-- ✅ Clearer error message in registration form
+### 🚀 Current: v0.2.9
+- ✅ New admin statistics system  
+- ✅ View totals, distributions, and top colors  
+- ✅ Added filters and sorting in code table  
+- ✅ Improved dashboard design and layout  
+- ✅ Updated SQL and documentation  
 
 ### 📝 Complete history
 See [CHANGELOG.md](CHANGELOG.md) for detailed change history.
+
 
 ## 📱 Usage
 

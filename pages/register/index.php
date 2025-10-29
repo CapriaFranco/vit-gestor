@@ -43,12 +43,13 @@
         $division = $_POST['division'];
         $nombre_equipo = $_POST['nombre_equipo'];
         $sistema = $_POST['sistema_juego'];
+        $tipo_cuatro_dos = ($sistema === '4:2' && isset($_POST['tipo_cuatro_dos'])) ? $_POST['tipo_cuatro_dos'] : NULL;
         $color = $_POST['color_remera'];
         $capitan = $_POST['integrante_1'];
         $telefono = $_POST['telefono'];
 
-        $stmt=$db->prepare("INSERT INTO equipos (curso,division,nombre_equipo,sistema_juego,color_remera,capitan,telefono) VALUES (?,?,?,?,?,?,?)");
-        $stmt->bind_param("sssssss",$curso,$division,$nombre_equipo,$sistema,$color,$capitan,$telefono);
+        $stmt=$db->prepare("INSERT INTO equipos (curso,division,nombre_equipo,sistema_juego,tipo_cuatro_dos,color_remera,capitan,telefono) VALUES (?,?,?,?,?,?,?,?)");
+        $stmt->bind_param("ssssssss",$curso,$division,$nombre_equipo,$sistema,$tipo_cuatro_dos,$color,$capitan,$telefono);
         $stmt->execute();
         $id_equipo=$stmt->insert_id;
 
@@ -174,11 +175,25 @@
                     Sistema de juego
                     <abbr title="Campo obligatorio">*</abbr>
                 </label>
-                <select id="sistema_juego" name="sistema_juego" required onchange="mostrarIntegrantes()">
+                <select id="sistema_juego" name="sistema_juego" required onchange="mostrarTipoCuatroDos()">
                     <option value="" selected disabled>Seleccionar</option>
                     <option value="6:0">6:0</option>
                     <option value="4:2">4:2</option>
                     <option value="5:1">5:1</option>
+                </select>
+            </div>
+
+            <!-- New field for 4:2 type selection -->
+            <div id="divTipoCuatroDos" class="flex-col dn">
+                <label>
+                    <img src="<?php echo buildPath($base_path, 'assets/img/icons/iteration-cw.svg'); ?>" alt="" class="label-icon" loading="lazy" decoding="async">
+                    Tipo de 4:2
+                    <abbr title="Campo obligatorio">*</abbr>
+                </label>
+                <select id="tipo_cuatro_dos" name="tipo_cuatro_dos" onchange="mostrarIntegrantes()">
+                    <option value="" selected disabled>Seleccionar</option>
+                    <option value="c">4:2 con Centrales</option>
+                    <option value="o">4:2 con Opuestos</option>
                 </select>
             </div>
 
@@ -217,14 +232,15 @@
                         <p>= Suplente</p>
                     </div>
                 </div>
-                <div class="telefono-capitan-container">
-                    <label>
-                        <img src="<?php echo buildPath($base_path, 'assets/img/icons/smartphone.svg'); ?>" alt="Telefono" class="label-icon" loading="lazy" decoding="async">
-                        Teléfono del capitán
-                        <abbr title="Campo obligatorio">*</abbr>
-                    </label>
-                    <input type="tel" name="telefono" id="telefono" placeholder="11 3126-4254" pattern="^[0-9]{2,3}( [0-9]{4}-[0-9]{4})?$" title="Ingrese el número de teléfono. Formato válido: XX XXXX-XXXX o XXX XXXX-XXXX (solo números, un espacio y un guion)" minlengt="12" maxlength="13" required>
-                </div>
+            </div>
+
+            <div id="telefonoDiv" class="flex-col dn">
+                <label>
+                    <img src="<?php echo buildPath($base_path, 'assets/img/icons/smartphone.svg'); ?>" alt="Telefono" class="label-icon" loading="lazy" decoding="async">
+                    Teléfono del capitán
+                    <abbr title="Campo obligatorio">*</abbr>
+                </label>
+                <input type="tel" name="telefono" id="telefono" placeholder="11 3126-4254" pattern="^[0-9]{2,3} [0-9]{4}-[0-9]{4}$" title="Ingrese el número de teléfono. Formato válido: XX XXXX-XXXX o XXX XXXX-XXXX (solo números, un espacio y un guion)" minlength="12" maxlength="13" required>
             </div>
 
             <div id="colorDiv" class="flex-col dn">
@@ -254,12 +270,48 @@
                 <p>Ver equipos ya registrados <a href="teams/" class="btn btn-outline">aquí</a></p>
             </div>
 
+            <!-- Added WhatsApp direct access button -->
+            <div class="whatsapp-container">
+                <p>Únete al grupo de WhatsApp del torneo:</p>
+                <a id="whatsappLinkRegister" href="#" target="_blank" class="whatsapp-button">
+                    <img src="<?php echo buildPath($base_path, 'assets/img/icons/whatsapp.svg'); ?>" alt="WhatsApp" loading="lazy" decoding="async">
+                    Unirse al grupo
+                </a>
+            </div>
+
             <div class="gh-repo-container">
                 <img src="<?php echo buildPath($base_path, 'assets/img/icons/github.svg'); ?>" alt="Github repositorio icon" class="icon" loading="lazy" decoding="async">
                 <p>Ver repositorio <a href="https://github.com/CapriaFranco/vit-gestor" target="_blank" class="btn-repo">aquí</a></p>
             </div>
         </form>
     </main>
-    <script src="<?php echo buildPath($base_path, 'scripts/main.js?v=2'); ?>"></script>
+    <script src="<?php echo buildPath($base_path, 'scripts/main.js?v=3'); ?>"></script>
+    <!-- Added WhatsApp link detection script with iPhone fix -->
+    <script>
+        // Detect device type and set appropriate WhatsApp link
+        const userAgent = navigator.userAgent.toLowerCase();
+        const isAndroid = /android/i.test(userAgent);
+        const isIOS = /iphone|ipad|ipod/i.test(userAgent);
+        const isMobile = isAndroid || isIOS;
+        
+        // WhatsApp group link
+        const whatsappGroupId = "CbpE4tkN2kMAoaTlkQXSLr";
+        
+        let whatsappLink;
+        if (isIOS) {
+            whatsappLink = `https://chat.whatsapp.com/${whatsappGroupId}`;
+        } else if (isAndroid) {
+            // Android intent URL
+            whatsappLink = `intent://chat.whatsapp.com/${whatsappGroupId}#Intent;package=com.whatsapp;scheme=https;end`;
+        } else {
+            // Desktop/Web WhatsApp
+            whatsappLink = `https://chat.whatsapp.com/${whatsappGroupId}`;
+        }
+        
+        const whatsappLinkElement = document.getElementById("whatsappLinkRegister");
+        if (whatsappLinkElement) {
+            whatsappLinkElement.href = whatsappLink;
+        }
+    </script>
 </body>
 </html>

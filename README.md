@@ -3,7 +3,7 @@
 Sistema web para el registro de equipos en el Torneo de Voley 2025. Desarrollado con PHP, MySQL y JavaScript.
 
 [![English](https://img.shields.io/badge/English-README.en.md-blue)](README_EN.md)
-[![Version](https://img.shields.io/badge/version-v0.2.4-green)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v0.2.9-green)](CHANGELOG.md)
 [![Changelog](https://img.shields.io/badge/changelog-ver%20historial-blue)](CHANGELOG.md)
 
 ## 📋 ¿Qué es?
@@ -130,35 +130,46 @@ $dbname = "tu_base_datos";
 
 ## 🎨 Características
 
-- **Diseño responsive** para móviles y desktop
-- **Interfaz moderna** con gradientes y animaciones
-- **Validación en tiempo real** de colores
-- **Sistema de posiciones** dinámico según el sistema de juego
-- **Páginas de éxito y error** personalizadas
-- **Ruteo amigable** con .htaccess
-- **Enlaces inteligentes de WhatsApp** (detecta móvil/desktop automáticamente)
-- **Compatibilidad cross-browser** optimizada con autoprefixer
-- **Validaciones de patrones** para caracteres especiales en español
-- **Longitud de campos** configurada (3-100 caracteres para equipo, 4-100 para integrantes/color)
-- **Visualización de equipos registrados** organizados por ciclos (Básico/Superior)
-- **Indicadores visuales** para suplentes y capitanes
-- **Contadores de estadísticas** de equipos y personas registradas
-- **Tablas optimizadas** con scroll horizontal en móviles
-- **Sistema de administración completo** con login protegido
-- **Dashboard para gestión de códigos de acceso**
-- **Generador de códigos únicos** (formato: aaaa-bbbb)
-- **Nueva tabla en base de datos para códigos de acceso**
-- **Validación de códigos en registro de equipos**
-- **Nuevas rutas**: /admin/, /dash/, /offline/
-- **Estilos completos para panel de administración**
+- **Diseño responsive** para móviles y desktop  
+- **Interfaz moderna** con gradientes y animaciones  
+- **Validación en tiempo real** de colores  
+- **Sistema de posiciones** dinámico según el sistema de juego  
+- **Páginas de éxito y error** personalizadas (403, 404, 500, offline)  
+- **Ruteo amigable** con .htaccess  
+- **Enlaces inteligentes de WhatsApp** (detecta móvil/desktop automáticamente)  
+- **Compatibilidad cross-browser** optimizada con autoprefixer  
+- **Validaciones de patrones** para caracteres especiales en español  
+- **Longitud de campos** configurada  
+  * Nombre del equipo: 3–100 caracteres  
+  * Integrantes / Color: 4–100 caracteres  
+- **Visualización de equipos registrados** organizados por ciclos (Básico/Superior)  
+- **Indicadores visuales** para suplentes y capitanes  
+- **Contadores de estadísticas** de equipos y personas registradas  
+- **Tablas optimizadas** con scroll horizontal en móviles  
+- **Sistema de administración completo** con login protegido  
+- **Dashboard para gestión de códigos de acceso**  
+- **Generador de códigos únicos** (formato: aaaa-bbbb)  
+- **Nueva tabla en base de datos para códigos de acceso**  
+- **Validación de códigos en registro de equipos**  
+- **Autenticación en base de datos** con contraseñas encriptadas  
+- **Nuevas rutas**: /admin/, /dash/, /offline/, /err/403/, /err/404/, /err/500/  
+- **Páginas de error personalizadas** con diseño consistente  
+- **Sistema de estadísticas** en panel de administración  
+  * Total de equipos y jugadores  
+  * Distribución por ciclos  
+  * Colores más elegidos  
+  * Últimos equipos registrados  
+- **Filtros y orden dinámico** en la tabla de códigos  
+- **Estilos optimizados** para panel de administración  
 
 ## 📊 Versiones
 
-### 🚀 Actual: v0.2.4
-- ✅ Mejora de validación del campo teléfono  
-- ✅ Nuevo patrón para formato argentino (ej: 11 3126-4254)  
-- ✅ Longitud mínima y máxima controlada (12–13 caracteres)  
-- ✅ Mensaje de error más claro en el formulario  
+### 🚀 Actual: v0.2.9
+- ✅ Nuevo sistema de estadísticas en panel de administración  
+- ✅ Visualización de totales, distribución y colores más usados  
+- ✅ Filtros y orden dinámico en tabla de códigos  
+- ✅ Mejoras visuales en dashboard y estructura de columnas  
+- ✅ Actualización de SQL y documentación  
 
 ### 📝 Historial completo
 Ver [CHANGELOG.md](CHANGELOG.md) para el historial detallado de cambios.

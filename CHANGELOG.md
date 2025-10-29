@@ -5,6 +5,369 @@ Todas las notables cambios a este proyecto serán documentadas en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.2.9] - 2025-10-29 - 20:26:00
+
+### 🔄 Rediseño Completo del Sistema de Edición de Equipos
+
+#### Arquitectura Tradicional PHP
+- **Eliminado enfoque JSON/AJAX problemático**: Reemplazado por formularios PHP tradicionales
+  - Mayor confiabilidad y estabilidad
+  - Sin errores de parseo JSON
+  - Procesamiento del lado del servidor más robusto
+- **Página de edición dedicada**: Nueva ruta `/a/teams/edit?id=X`
+  - Formulario completo similar al de registro
+  - Carga de datos del equipo desde la base de datos
+  - Procesamiento POST tradicional con recarga de página
+
+#### Flujo de Edición Simplificado
+1. **Lista de equipos** (`/a/teams`): Vista de todos los equipos con botón "Editar"
+2. **Página de edición** (`/a/teams/edit?id=X`): Formulario completo con datos precargados
+3. **Guardado**: Submit del formulario → Procesamiento PHP → Recarga con mensaje de éxito
+4. **Vuelta a lista**: Botón "Volver a Equipos" para regresar
+
+#### Funcionalidades de Edición
+- **Información del equipo**:
+  - Nombre del equipo
+  - Curso y división (con actualización dinámica)
+  - Sistema de juego (6:0, 4:2, 5:1)
+  - Tipo de 4:2 (aparece/desaparece dinámicamente)
+  - Color de remera
+  - Teléfono del capitán
+
+- **Gestión de integrantes**:
+  - Editar nombres de integrantes existentes
+  - Cambiar posiciones según sistema de juego
+  - Agregar nuevos integrantes (hasta 8 total)
+  - Campos vacíos para integrantes adicionales
+  - Posiciones dinámicas según sistema seleccionado
+
+#### Metadata Visible
+- **ID del registro**: Identificador único en la base de datos
+- **Código usado**: Código de acceso utilizado para registrar el equipo
+- **Fecha de registro**: Fecha original de registro (formato dd/mm/yyyy)
+
+#### Procesamiento del Lado del Servidor
+- **Validación robusta**: Verificación de campos requeridos
+- **Actualización atómica**: 
+  1. Actualiza datos del equipo en tabla `equipos`
+  2. Elimina integrantes antiguos
+  3. Inserta integrantes nuevos/actualizados
+- **Mensajes de feedback**: Success/error messages después de guardar
+- **Seguridad**: Prepared statements para prevenir SQL injection
+
+#### JavaScript Dinámico
+- **actualizarDivision()**: Cambia opciones de división según curso seleccionado
+  - Ciclo Básico (1ro-3ro): A, B, C
+  - Ciclo Superior (4to-7mo): 1ra, 2da
+- **actualizarSistema()**: Muestra/oculta campo de tipo 4:2
+  - Aparece solo cuando sistema es 4:2
+  - Se elimina para otros sistemas
+- **actualizarPosiciones()**: Regenera selectores de posición
+  - 6:0: Sin posiciones (icono de slash)
+  - 4:2/5:1: Selectores con posiciones disponibles
+  - Mantiene valores seleccionados al cambiar
+
+#### Archivos Eliminados
+- `scripts/admin-teams.js`: Lógica AJAX eliminada
+- `php/update_team.php`: Endpoint JSON eliminado
+
+#### Archivos Nuevos
+- `pages/admins/teams/edit/index.php`: Página de edición completa con procesamiento PHP
+
+#### Archivos Modificados
+- `pages/admins/teams/index.php`: Simplificado a solo vista de equipos con botón "Editar"
+- `index.php`: Agregada ruta para `/a/teams/edit`
+
+### 🎯 Ventajas del Nuevo Enfoque
+- **Sin errores de JSON**: Eliminados todos los problemas de parseo
+- **Más simple**: Menos código JavaScript, más PHP tradicional
+- **Más robusto**: Procesamiento del lado del servidor más confiable
+- **Mejor UX**: Mensajes claros de éxito/error
+- **Fácil debugging**: Errores PHP más fáciles de rastrear que errores AJAX
+- **Compatible**: Funciona en todos los navegadores sin problemas
+
+### 🔧 Mejoras Técnicas
+- **Prepared statements**: Todas las consultas SQL usan prepared statements
+- **Validación de sesión**: Verificación de admin en ambas páginas
+- **Redirecciones seguras**: Validación de ID de equipo antes de mostrar formulario
+- **Transacciones implícitas**: Delete + Insert de integrantes en secuencia
+
+## [v0.2.8] - 2025-10-29 - 17:38:00
+
+### ✏️ Editor de Equipos Mejorado
+
+#### Interfaz de Usuario
+- **Botones de ancho completo**: Todos los botones ahora ocupan el 100% del ancho disponible
+  - Mejor usabilidad en dispositivos móviles
+  - Diseño más consistente y profesional
+  - Clase `.btn-full-width` aplicada a botones de navegación y acciones
+
+#### Diseño de Campos
+- **Grid layout para campos**: Todos los campos de edición organizados en grid `repeat(2, 1fr)`
+  - Mejor aprovechamiento del espacio
+  - Diseño responsive que se adapta a móviles (1 columna en pantallas pequeñas)
+  - Campos alineados y balanceados visualmente
+
+#### Información General Ampliada
+- **Nuevos campos en vista de equipo**:
+  - **ID del Registro**: Identificador único del equipo en la base de datos
+  - **Teléfono del Capitán**: Número de contacto del capitán del equipo
+  - **Código Usado**: Código de acceso utilizado para el registro
+  - **Fecha de Registro**: Fecha en que se registró el equipo (formato dd/mm/yyyy)
+- **Grid layout mejorado**: Metadata organizada en grid de 2 columnas
+  - Responsive: cambia a 1 columna en móviles
+
+#### Modo de Edición
+- **Toggle entre vista y edición**: Botón "Editar" cambia el div a modo edición
+  - Interfaz similar al formulario de registro
+  - Todos los campos editables con sus respectivos controles
+  - Botón "Cancelar" para volver a la vista sin guardar
+
+#### Campos Editables
+- **Información básica**:
+  - Nombre del equipo (input text)
+  - Color de remera (input text)
+  - Curso (select con todas las opciones)
+  - División (select dinámico según curso)
+  - Sistema de juego (select: 6:0, 4:2, 5:1)
+  - Tipo de 4:2 (select: Con Centrales / Con Opuestos) - aparece solo si sistema es 4:2
+
+#### Gestión de Integrantes
+- **Tabla editable de miembros**:
+  - Editar nombre de cada integrante (input text inline)
+  - Cambiar posición (select inline con opciones según sistema)
+  - Eliminar integrantes existentes (botón 🗑️)
+  - Agregar nuevos integrantes (botón "+ Agregar Integrante")
+- **Validaciones**:
+  - Máximo 8 integrantes por equipo
+  - Mínimo según sistema de juego (6 para 6:0 y 4:2 con opuestos, 7 para 4:2 con centrales y 5:1)
+  - Renumeración automática al eliminar integrantes
+- **Posiciones dinámicas**: Select de posiciones se adapta al sistema de juego
+  - 6:0: Sin posiciones (N/A)
+  - 4:2 con Centrales: Punta, Central, Armador, Libero
+  - 4:2 con Opuestos: Punta, Opuesto, Armador
+  - 5:1: Punta, Opuesto, Central, Armador, Libero
+
+#### Funcionalidad JavaScript
+- **toggleEditMode()**: Cambia entre vista y modo edición
+- **cancelEdit()**: Cancela edición y vuelve a vista sin guardar
+- **handleSistemaChange()**: Muestra/oculta campo de tipo 4:2 según sistema seleccionado
+- **addIntegranteRow()**: Agrega nueva fila para integrante (máx 8)
+- **removeIntegrante()**: Elimina integrante con confirmación
+- **saveTeamChanges()**: Guarda cambios del equipo (preparado para implementación AJAX)
+  - Recolecta datos del formulario
+  - Serializa información de integrantes
+  - Console logs para debugging
+  - Placeholder para llamada AJAX
+
+### 🎨 Estilos CSS Nuevos
+
+#### Clases Agregadas
+- `.btn-full-width`: Botones de ancho completo (100%)
+- `.edit-fields-grid`: Grid de 2 columnas para campos de edición
+- `.members-edit-section`: Sección de edición de miembros
+- `.edit-members-table`: Tabla editable con inputs y selects inline
+- `.btn-icon`: Botones de iconos para acciones (editar, eliminar)
+- `.btn-primary`: Botón primario con color principal
+- `.team-edit-mode`: Contenedor del modo de edición
+- `.edit-team-form`: Formulario de edición con flex layout
+
+#### Responsive Design
+- Grid de campos: 2 columnas → 1 columna en móviles (<768px)
+- Botones adaptables a diferentes tamaños de pantalla
+- Tablas con scroll horizontal en pantallas pequeñas
+
+### 🔧 Mejoras Técnicas
+- **Consulta SQL mejorada**: Incluye JOIN con tabla `codigos_acceso` para obtener código usado
+- **Estructura de datos completa**: Toda la información necesaria para edición disponible en el frontend
+- **Preparado para AJAX**: Funciones JavaScript listas para implementar llamadas al backend
+- **Debugging facilitado**: Console logs con prefijo `[v0]` para seguimiento de operaciones
+
+### 📝 Archivos Modificados
+- `pages/admins/teams/index.php`: Interfaz completa de edición con vista y modo edición
+- `styles/main.css`: Nuevos estilos para editor de equipos y componentes relacionados
+
+### 🚀 Próximos Pasos
+- Implementar endpoints PHP para guardar cambios (AJAX)
+- Validaciones del lado del servidor
+- Mensajes de éxito/error después de guardar
+- Actualización en tiempo real sin recargar página
+
+## [v0.2.7] - 2025-10-29 - 15:20:00
+
+### 🎨 Mejoras de Diseño y UX
+
+#### Navegación de Administración
+- **Grid layout mejorado**: Navegación de admin reorganizada con `grid-template-columns: repeat(2, 1fr)`
+  - Mejor adaptabilidad en diferentes tamaños de pantalla
+  - Diseño más limpio y organizado
+  - Responsive: cambia a una columna en móviles (<480px)
+
+#### Dashboard de Administración
+- **Simplificación de contenido**: Eliminadas las secciones de "Ciclos Básicos" y "Ciclo Superior"
+  - Dashboard más enfocado en estadísticas y navegación
+  - Reducción de scroll innecesario
+  - Mejor rendimiento al cargar menos datos
+
+#### Colores Utilizados
+- **Estilos consistentes**: Aplicados los mismos estilos de la página de registro
+  - Diseño de tarjetas con `.color-card`
+  - Lista de colores con `.color-list` usando flexbox
+  - Formato de chips/badges para cada color
+  - Bordes y sombras consistentes con el resto del sitio
+
+### 📱 Integración de WhatsApp
+
+#### Acceso Directo en Registro
+- **Botón de WhatsApp**: Agregado en la página de registro
+  - Acceso directo al grupo del torneo
+  - Mismo diseño que en la página de éxito
+  - Ubicado después del enlace a equipos registrados
+
+#### Corrección para iPhone
+- **Detección mejorada de dispositivos**:
+  - iOS: Usa `https://chat.whatsapp.com/` directamente
+  - Android: Usa `intent://` para abrir la app nativa
+  - Desktop: Usa WhatsApp Web
+- **Fix específico para iPhone**: Corregido el problema donde el enlace no funcionaba
+  - Anteriormente usaba `intent://` que no es compatible con iOS
+  - Ahora detecta iOS y usa el esquema correcto `https://`
+  - Funciona correctamente en iPhone, iPad y iPod
+
+### 🎨 Estilos CSS
+
+#### Nuevas Clases
+- `.admin-nav-buttons`: Grid de 2 columnas para navegación
+- `.colors-section`: Sección de colores utilizados
+- `.colors-grid`: Grid de 2 columnas para tarjetas de colores
+- `.color-card`: Tarjeta individual de colores por ciclo
+- `.color-list`: Lista flex de colores con chips
+- `.whatsapp-container`: Contenedor para botón de WhatsApp en registro
+
+#### Responsive Design
+- Grid de navegación: 2 columnas → 1 columna en móviles
+- Grid de colores: 2 columnas → 1 columna en tablets (<768px)
+
+### 📝 Archivos Modificados
+- `styles/main.css`: Nuevos estilos para navegación, colores y WhatsApp
+- `pages/admins/dashboard/index.php`: Simplificación y nuevos estilos de colores
+- `pages/register/index.php`: Agregado botón de WhatsApp con detección de dispositivo
+
+## [v0.2.6] - 2025-10-28 - 11:50:00
+
+### 🏗️ Reestructuración del Sistema de Administración
+- **Nueva estructura de carpetas**:
+  - `/pages/admins/login/` - Página de inicio de sesión de administrador
+  - `/pages/admins/dashboard/` - Dashboard principal con vista general
+  - `/pages/admins/codes/` - Gestión de códigos de acceso
+  - `/pages/admins/teams/` - Editor de equipos con funcionalidad completa
+
+### 🛣️ URLs Amigables para Administración
+- **Nuevas rutas cortas**:
+  - `/a/login` - Acceso al panel de administración
+  - `/a/dash` - Dashboard principal
+  - `/a/codes` - Generador y listado de códigos
+  - `/a/teams` - Editor de equipos
+- **Compatibilidad hacia atrás**: Las rutas antiguas (`/admin`, `/dash`) redirigen automáticamente a las nuevas
+
+### 📊 Dashboard Mejorado
+- **Navegación centralizada**: Botones para acceder a todas las secciones del panel
+  - Inicio (página pública)
+  - Ver Equipos (página pública)
+  - Códigos (administración)
+  - Editar Equipos (administración)
+- **Tarjetas de equipos**: Visualización completa de todos los equipos registrados
+  - Separados por Ciclos Básicos y Ciclo Superior
+  - Información detallada de cada equipo
+  - Lista de integrantes con posiciones
+- **Tarjetas de colores**: Dos nuevas tarjetas que muestran:
+  - Colores utilizados en Ciclos Básicos
+  - Colores utilizados en Ciclo Superior
+- **Contadores de estadísticas**: Equipos y personas registradas
+
+### ✏️ Editor de Equipos
+- **Funcionalidad de edición completa** (interfaz lista, lógica por implementar):
+  - Editar nombre del equipo
+  - Cambiar color de remera
+  - Modificar sistema de juego
+  - Cambiar tipo de 4:2 (Con Centrales / Con Opuestos)
+  - Agregar nuevos integrantes
+  - Eliminar integrantes existentes
+  - Editar nombre y posición de integrantes
+- **Tablas con acciones**: Botones de editar y eliminar en cada integrante
+- **Botón de agregar**: Permite añadir nuevos integrantes al equipo
+- **Visualización mejorada**: Muestra tipo de 4:2 cuando corresponde
+
+### 🎨 Interfaz de Administración
+- **Navegación consistente**: Botones de navegación en todas las páginas de admin
+- **Diseño unificado**: Todas las páginas siguen el mismo patrón visual
+- **Breadcrumbs implícitos**: Botones de "Volver" y navegación clara
+- **Acciones contextuales**: Botones relevantes según la página actual
+
+### 🔐 Seguridad
+- **Validación de sesión**: Todas las páginas de admin verifican autenticación
+- **Redirecciones automáticas**: Usuarios no autenticados son redirigidos al login
+- **URLs protegidas**: Acceso restringido a todas las rutas de administración
+
+### 🔄 Migraciones
+- **Compatibilidad total**: Las rutas antiguas siguen funcionando
+- **Redirecciones automáticas**: `/admin` → `/a/login`, `/dash` → `/a/dash`
+- **Sin pérdida de funcionalidad**: Todas las características existentes preservadas
+
+### 📝 Notas Técnicas
+- **Funciones JavaScript placeholder**: Las funciones de edición están preparadas para implementación AJAX
+- **Estructura modular**: Cada sección de admin en su propia carpeta
+- **Código reutilizable**: Componentes compartidos entre páginas de admin
+- **Preparado para expansión**: Estructura lista para agregar más funcionalidades
+
+## [v0.2.5] - 2025-10-27 - 23:50:00
+
+### ✨ Nuevo
+- **Selección de tipo de 4:2**: Implementado selector de tipo de sistema 4:2
+  - Nuevo campo "Tipo de 4:2" que aparece al seleccionar sistema 4:2
+  - Opciones disponibles:
+    * 4:2 con Centrales (2 Punta, 2 Centrales, 2 Armadores, 1 Libero)
+    * 4:2 con Opuestos (2 Punta, 2 Opuestos, 2 Armadores)
+  - Campo obligatorio para sistema 4:2
+
+### 🎨 Interfaz Mejorada
+- **Revelación progresiva de formulario**: Implementado sistema de campos progresivos
+  - Sistema de juego → Tipo de 4:2 (solo si es 4:2) → Tabla de integrantes
+  - Tabla completa y válida → Campo de teléfono
+  - Teléfono válido → Campo de color
+  - Color válido → Campo de código
+  - Código válido → Botón de envío
+  - Mejor experiencia de usuario con validación en tiempo real
+
+### 🔧 Validaciones
+- **Validación de tabla completa**: Sistema inteligente que verifica:
+  - Todos los nombres obligatorios ingresados (mínimo 4 caracteres)
+  - Todas las posiciones seleccionadas (excepto en 6:0)
+  - Validación de formato de teléfono antes de mostrar siguiente campo
+  - Validación de color antes de mostrar código
+  - Validación de código antes de mostrar botón de envío
+
+### 📊 Base de Datos
+- **Nuevo campo**: `tipo_cuatro_dos` en tabla `equipos`
+  - Tipo: ENUM('c', 'o')
+  - 'c' = 4:2 con Centrales
+  - 'o' = 4:2 con Opuestos
+  - Campo opcional (solo requerido para sistema 4:2)
+  - Actualización de `sql/db.sql` y `sql/db-infinityfree.sql`
+
+### 🔄 Sistema de Posiciones
+- **Posiciones dinámicas según tipo de 4:2**:
+  - 4:2 con Centrales: Armador, Central, Punta, Libero
+  - 4:2 con Opuestos: Armador, Opuesto, Punta (sin Libero)
+  - Validación automática de posiciones disponibles
+  - Actualización dinámica de opciones según selección
+
+### 🐛 Correcciones
+- **Campo de teléfono**: Movido fuera de la tabla de integrantes
+  - Ahora aparece como campo independiente después de completar la tabla
+  - Mejor organización visual del formulario
+  - Validación mejorada con patrón específico
+
 ## [v0.2.4] - 2025-10-26 - 17:44:00
 
 ### ✨ Nuevo

@@ -1,14 +1,14 @@
 <?php
     session_start();
-    include __DIR__ . '/../../php/db.php';
-    require_once __DIR__ . '/../../php/functions.php';
+    include __DIR__ . '/../../../php/db.php';
+    require_once __DIR__ . '/../../../php/functions.php';
     $base_path = defined('BASE_PATH') ? BASE_PATH : rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
 
     $error = '';
     
     // Check if already logged in
     if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
-        header('Location: ' . buildPath($base_path, 'dash'));
+        header('Location: ' . buildPath($base_path, 'a/dash'));
         exit;
     }
 
@@ -24,7 +24,7 @@
             
             if (password_verify($password, $row['password_hash'])) {
                 $_SESSION['admin_logged_in'] = true;
-                header('Location: ' . buildPath($base_path, 'dash'));
+                header('Location: ' . buildPath($base_path, 'a/dash'));
                 exit;
             } else {
                 $error = 'Contraseña incorrecta';

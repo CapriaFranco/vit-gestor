@@ -24,11 +24,28 @@
     elseif ($url == 'teams' || $url == 'teams/') { 
         include __DIR__ . '/pages/registered-teams/index.php'; 
     }
+    elseif ($url == 'a/login' || $url == 'a/login/') { 
+        include __DIR__ . '/pages/admins/login/index.php'; 
+    }
+    elseif ($url == 'a/dash' || $url == 'a/dash/') { 
+        include __DIR__ . '/pages/admins/dashboard/index.php'; 
+    }
+    elseif ($url == 'a/codes' || $url == 'a/codes/') { 
+        include __DIR__ . '/pages/admins/code/index.php'; 
+    }
+    elseif ($url == 'a/teams' || $url == 'a/teams/') { 
+        include __DIR__ . '/pages/admins/teams/index.php'; 
+    }
+    elseif (preg_match('#^a/teams/edit/?$#', $url)) { 
+        include __DIR__ . '/pages/admins/teams/edit/index.php'; 
+    }
     elseif ($url == 'admin' || $url == 'admin/') { 
-        include __DIR__ . '/pages/admins/index.php'; 
+        header('Location: ' . $base_path . '/a/login');
+        exit;
     }
     elseif ($url == 'dash' || $url == 'dash/') { 
-        include __DIR__ . '/pages/admins/dashboard/index.php'; 
+        header('Location: ' . $base_path . '/a/dash');
+        exit;
     }
     elseif ($url == 'err/403' || $url == 'err/403/') { 
         include __DIR__ . '/pages/err/403.php'; 
