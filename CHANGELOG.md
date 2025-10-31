@@ -5,6 +5,92 @@ Todas las notables cambios a este proyecto serán documentadas en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.2.10] - 2025-10-31 - 10:59:00
+
+### 🔧 Correcciones Críticas en Editor de Equipos
+
+#### Lógica de Posiciones Corregida
+- **Sistema 6:0**: Funciona correctamente mostrando iconos de "sin posición"
+- **Sistema 5:1**: 
+  - Corregido: 7 jugadores obligatorios (antes mostraba 8)
+  - Jugador #8 ahora muestra icono de suplente correctamente
+  - Posiciones dinámicas con cantidades específicas por rol
+- **Sistema 4:2**:
+  - **Con Centrales**: 7 jugadores obligatorios (2 Punta, 2 Central, 2 Armador, 1 Libero)
+  - **Con Opuestos**: 6 jugadores obligatorios (2 Punta, 2 Opuesto, 2 Armador)
+  - Corregido cálculo de jugadores requeridos según tipo
+
+#### Selectores de Posición Mejorados
+- **Opción "Seleccionar" disponible**: Permite intercambiar posiciones fácilmente
+  - Seleccionar una posición → cambiarla a "Seleccionar"
+  - Asignar la posición liberada a otro jugador
+  - Facilita reorganización de posiciones sin conflictos
+- **Lógica igual al registro**: Implementada función `obtenerPosicionesDisponibles()`
+  - Respeta cantidades máximas por posición
+  - Actualiza opciones dinámicamente según selecciones
+  - Previene duplicación de posiciones únicas (Libero, Armador en 5:1)
+
+#### Jugadores Suplentes
+- **Identificación correcta**: Jugadores más allá del mínimo requerido
+  - 6:0: Jugadores 7-8 son suplentes
+  - 5:1: Jugador 8 es suplente
+  - 4:2 con Centrales: Jugador 8 es suplente
+  - 4:2 con Opuestos: Jugadores 7-8 son suplentes
+- **Icono de suplente**: Muestra icono refresh-ccw en lugar de select
+- **Sin posición asignada**: Suplentes no requieren posición específica
+
+#### Nuevo Archivo JavaScript
+- **scripts/admin-edit.js**: Lógica dedicada para edición de equipos
+  - Función `obtenerPosicionesDisponibles()`: Calcula posiciones disponibles
+  - Función `regenerarPosiciones()`: Actualiza tabla según sistema seleccionado
+  - Función `actualizarPosicionSeleccionada()`: Maneja cambios de posición
+  - Función `actualizarSistema()`: Muestra/oculta tipo de 4:2
+  - Función `actualizarDivision()`: Actualiza divisiones según curso
+  - Array `posicionesSeleccionadas`: Rastrea posiciones asignadas
+
+#### Funcionalidad de Eliminación
+- **Botón "Eliminar Equipo"**: Nuevo botón con estilo danger (rojo)
+- **Confirmación de eliminación**: Diálogo de confirmación antes de eliminar
+- **php/delete_team.php**: Nuevo archivo para procesar eliminación
+  - Elimina integrantes del equipo (foreign key)
+  - Elimina el equipo de la base de datos
+  - Marca código de acceso como no usado (disponible nuevamente)
+  - Redirige a lista de equipos con mensaje de éxito
+
+#### Estilos CSS Agregados
+- **`.btn-danger`**: Botón rojo para acciones destructivas
+  - Background: var(--color-error)
+  - Hover: #d32f2f con elevación
+  - Color de texto: blanco para contraste
+- **`.team-meta-edit`**: Grid de metadata en página de edición
+  - 2 columnas en desktop, 1 en móvil
+  - Muestra ID, código, fecha de registro
+  - Background destacado con borde
+
+#### Correcciones de Bugs
+- **Cálculo de jugadores obligatorios**: Ahora considera tipo de 4:2
+  - 4:2 con Opuestos: 6 jugadores (antes incorrectamente 7)
+  - 4:2 con Centrales: 7 jugadores (correcto)
+- **Regeneración de posiciones**: Al cambiar sistema se actualizan correctamente
+  - Mantiene posiciones seleccionadas cuando es posible
+  - Limpia posiciones incompatibles con nuevo sistema
+  - Actualiza iconos de suplentes dinámicamente
+- **Inicialización en carga**: DOMContentLoaded recolecta posiciones iniciales
+  - Lee valores de selects generados por PHP
+  - Aplica lógica de posiciones desde el inicio
+
+### 📝 Archivos Modificados
+- `pages/admins/teams/edit/index.php`: Integración de nuevo script JS
+- `styles/main.css`: Estilos para botón danger y metadata
+- `scripts/admin-edit.js`: Nueva lógica de edición (creado)
+- `php/delete_team.php`: Endpoint de eliminación (creado)
+
+### 🎯 Mejoras de UX
+- **Intercambio de posiciones más fácil**: Opción "Seleccionar" permite reorganizar
+- **Feedback visual claro**: Iconos distintos para sin posición vs suplente
+- **Validación automática**: Solo muestra posiciones disponibles según sistema
+- **Eliminación segura**: Confirmación antes de borrar equipo permanentemente
+
 ## [v0.2.9] - 2025-10-29 - 20:26:00
 
 ### 🔄 Rediseño Completo del Sistema de Edición de Equipos

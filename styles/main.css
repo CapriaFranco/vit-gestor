@@ -1935,6 +1935,21 @@ input[type="password"]:focus {
   box-shadow: var(--shadow-md);
 }
 
+/* Added danger button styling for delete team */
+.btn-danger {
+  background: var(--color-error);
+  color: var(--color-light);
+  border: 2px solid var(--color-error);
+  font-weight: 600;
+}
+
+.btn-danger:hover {
+  background: #d32f2f;
+  border-color: #d32f2f;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
 /* Edit mode specific styling */
 .team-edit-mode {
   padding-top: var(--spacing-md);
@@ -1944,4 +1959,35 @@ input[type="password"]:focus {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
+}
+
+/* Added team metadata display styling for edit page */
+.team-meta-edit {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background: var(--color-bg-light);
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-effects);
+  margin-bottom: var(--spacing-lg);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .team-meta-edit {
+    grid-template-columns: 1fr;
+  }
+}
+
+.team-meta-edit .meta-item {
+  background: var(--color-light);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+}
+
+.team-meta-edit .meta-item strong {
+  color: var(--color-dark);
+  margin-right: var(--spacing-xs);
 }

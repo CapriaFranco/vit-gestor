@@ -88,7 +88,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Equipo - <?php echo htmlspecialchars($equipo['nombre_equipo']); ?></title>
-    <link rel="stylesheet" href="<?php echo buildPath($base_path, 'styles/main.css?v=7'); ?>">
+    <link rel="stylesheet" href="<?php echo buildPath($base_path, 'styles/main.css?v=8'); ?>">
     <link rel="icon" type="image/x-icon" href="<?php echo buildPath($base_path, 'assets/img/favicon.ico'); ?>">
     
     <meta name="robots" content="noindex, nofollow">
@@ -316,79 +316,33 @@
              
             <button type="submit" class="btn btn-primary btn-full-width">Guardar Cambios</button>
 
+            <!-- Added delete team button -->
+            <button type="button" onclick="confirmarEliminarEquipo()" class="btn btn-danger btn-full-width">Eliminar Equipo</button>
+
             <div class="bottom-actions">
                 <a href="<?php echo buildPath($base_path, 'a/teams'); ?>" class="btn btn-secondary btn-full-width">← Volver a Equipos</a>
             </div>
         </form>
     </main>
 
+    <script src="<?php echo buildPath($base_path, 'scripts/admin-edit.js?v=1'); ?>"></script>
     <script>
-        function actualizarDivision() {
-            const curso = document.getElementById('curso').value;
-            const divisionSelect = document.getElementById('division');
-            const isBasico = ['1ro', '2do', '3ro'].includes(curso);
-            
-            divisionSelect.innerHTML = isBasico ?
-                '<option value="A">A</option><option value="B">B</option><option value="C">C</option>' :
-                '<option value="1ra">1ra</option><option value="2da">2da</option>';
-        }
-
-        function actualizarSistema() {
-            const sistema = document.getElementById('sistema_juego').value;
-            const tipoDiv = document.getElementById('divTipoCuatroDos');
-            
-            if (sistema === '4:2') {
-                if (!tipoDiv) {
-                    const newDiv = document.createElement('div');
-                    newDiv.id = 'divTipoCuatroDos';
-                    newDiv.className = 'flex-col';
-                    newDiv.innerHTML = `
-                        <label>
-                            <img src="<?php echo buildPath($base_path, 'assets/img/icons/iteration-cw.svg'); ?>" alt="" class="label-icon" loading="lazy" decoding="async">
-                            Tipo de 4:2
-                            <abbr title="Campo obligatorio">*</abbr>
-                        </label>
-                        <select id="tipo_cuatro_dos" name="tipo_cuatro_dos" required onchange="actualizarPosiciones()">
-                            <option value="c">4:2 con Centrales</option>
-                            <option value="o">4:2 con Opuestos</option>
-                        </select>
-                    `;
-                    document.getElementById('sistema_juego').closest('.flex-col').after(newDiv);
-                }
-            } else {
-                if (tipoDiv) {
-                    tipoDiv.remove();
-                }
-            }
-            
-            actualizarPosiciones();
-        }
-
-        function actualizarPosiciones() {
-            const sistema = document.getElementById('sistema_juego').value;
-            const tbody = document.getElementById('bodyIntegrantes');
-            const rows = tbody.querySelectorAll('tr');
-            
-            rows.forEach((row, index) => {
-                const posCell = row.cells[2];
-                const numero = index + 1;
+        function confirmarEliminarEquipo() {
+            if (confirm('¿Estás seguro de que deseas eliminar este equipo? Esta acción no se puede deshacer.')) {
+                // Create a form to submit delete request
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '<?php echo buildPath($base_path, 'php/delete_team.php'); ?>';
                 
-                if (sistema === '6:0') {
-                    posCell.innerHTML = '<img src="<?php echo buildPath($base_path, 'assets/img/icons/circle-slash.svg'); ?>" alt="Sin posición" class="icon" loading="lazy" decoding="async">';
-                } else {
-                    const hasValue = posCell.querySelector('select') && posCell.querySelector('select').value;
-                    posCell.innerHTML = `
-                        <select name="posicion_${numero}">
-                            <option value="">Suplente</option>
-                            <option value="Punta">Punta</option>
-                            <option value="Opuesto">Opuesto</option>
-                            <option value="Central">Central</option>
-                            <option value="Armador">Armador</option>
-                            <option value="Libero">Libero</option>
-                        </select>
-                    `;
-                }
-            });
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'team_id';
+                input.value = '<?php echo $team_id; ?>';
+                
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+            }
         }
     </script>
 </body>
